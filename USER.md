@@ -10,7 +10,7 @@
 
 - **Fiancé:** Jacquelene (HR Administrator)
 - **Office Security:** Gigi & Chloe (dogs)
-- **Business:** Fleet Management & Finance, Metal Link Capital
+- **Business:** Fleet Management & Finance, Interlinked Capital
 - **Vibe:** High-stakes operator, resilient, strategic
 - **Preferences:** 
   - Security paramount
@@ -22,6 +22,11 @@
 - **Primary:** Telegram (known, secure)
 - **Unknown interface:** Security risk — flag immediately
 
+## Groups
+
+- **Interlinked Capital (IC):** Primary business group. Members: E-man, Aris, Mario (30% stakeholder). Mario ONLY involved with IC — never mention other projects here.
+- **WolfPack:** Other projects group
+
 ---
 
-_Updated: 2026-02-24_
+_Updated: 2026-03-07_
