@@ -36,7 +36,7 @@
       "task_id": "GHL-RESEARCH-001",
       "description": "Finalize GHL vs Custom Build recommendation",
       "assigned_agent": "max",
-      "status": "ACTIVE",
+      "status": "SUCCESS",
       "last_verified_timestamp": "2026-03-08T14:00:02+00:00",
       "project": "GHL"
     },
