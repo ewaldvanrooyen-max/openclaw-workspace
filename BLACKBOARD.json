@@ -12,7 +12,7 @@
       "task_id": "IC-FOLLOWUP-001",
       "description": "48-hour follow-up cron (8am SA) for INCOMPLETE/PENDING leads",
       "assigned_agent": "jiles",
-      "status": "ACTIVE",
+      "status": "SUCCESS",
       "last_verified_timestamp": "2026-03-08T11:51:50+00:00",
       "project": "Interlinked Capital"
     },
@@ -72,6 +72,14 @@
       "status": "ACTIVE",
       "last_verified_timestamp": "2026-03-08T16:00:02+00:00",
       "project": "Empire Infrastructure"
+    },
+    {
+      "task_id": "IC-CHANNEL-001",
+      "description": "Set up Interlinked Capital Discord channel with progress tracking threads for each target",
+      "assigned_agent": "aris",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T21:21:00Z",
+      "project": "Interlinked Capital"
     },
     {
       "task_id": "AFRIKAANS-001",
