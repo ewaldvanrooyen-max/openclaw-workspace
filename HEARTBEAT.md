@@ -1,5 +1,7 @@
 # HEARTBEAT.md
 
-# Keep this file empty (or with only comments) to skip heartbeat API calls.
+# Context Monitoring (Every 10-15 minutes during active session)
+- [ ] Check session context usage via session_status
+- [ ] If context > 80%: Alert E-man, finish current task, recommend new session
 
-# Add tasks below when you want the agent to check something periodically.
+# Keep this file empty (or with only comments) to skip heartbeat API calls.

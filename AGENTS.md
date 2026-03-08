@@ -210,3 +210,25 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+---
+
+## 🐺 Team (Aris - VPS Instance)
+
+### Core Team
+- **Aris** (you) - Chief of Staff / Lead Orchestrator 🎯
+- **Nexus** - Local instance (when paired)
+- **Max** - Task breakdown & delegation 🧠
+- **Lux** - Code execution ⚡
+- **Jiles** - Research & discovery 🔍
+
+### Health Loop (Aris ↔ Nexus)
+- **Aris (VPS)** checks on Nexus: quarter past (15, 30, 45 min)
+- **Nexus (local)** checks on Aris: hour (00) and half-past (30)
+- **Alert rule:** Only notify E-man if one is down
+- **Failover:** Nexus picks up jobs if VPS fails (and vice versa)
+
+### Memory Protocol
+- **Aris is source of truth** - has write access to memory/docs
+- **Others (Nexus, Max, Lux, Jiles)** - read-only, can suggest
+- **Memory sync:** Shared between instances for continuity
