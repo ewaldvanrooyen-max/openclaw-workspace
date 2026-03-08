@@ -77,8 +77,8 @@
       "task_id": "AFRIKAANS-001",
       "description": "Learn Afrikaans: Read Afrikaans news/articles, document new vocabulary, post learnings to #empire-funding. Goal: Become fluent enough to understand client communications.",
       "assigned_agent": "jiles",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-08T17:21:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-08T18:00:01+00:00",
       "project": "Empire Skills",
       "priority": "PERMANENT"
     },
