@@ -53,8 +53,8 @@
       "task_id": "PHONE-001",
       "description": "Research: How to get a phone number for social media accounts - virtual numbers, SIM solutions, verification services. Make it 'human'.",
       "assigned_agent": "jiles",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-08T13:24:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-08T15:00:02+00:00",
       "project": "Empire Infrastructure"
     },
     {
