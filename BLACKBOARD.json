@@ -1,6 +1,71 @@
 {
-  "tasks": [],
-  "last_sync": "2026-03-08T10:09:00Z",
+  "tasks": [
+    {
+      "task_id": "IC-POPIA-001",
+      "description": "POPIA verification flow for Finance Workflow",
+      "assigned_agent": "lux",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T10:12:00Z",
+      "project": "Interlinked Capital"
+    },
+    {
+      "task_id": "IC-FOLLOWUP-001",
+      "description": "48-hour follow-up cron (8am SA) for INCOMPLETE/PENDING leads",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T10:12:00Z",
+      "project": "Interlinked Capital"
+    },
+    {
+      "task_id": "IC-SHORTCODE-001",
+      "description": "Implement short codes (D1, D2, I1, P1, A1) for consultants",
+      "assigned_agent": "lux",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T10:12:00Z",
+      "project": "Interlinked Capital"
+    },
+    {
+      "task_id": "CE-GEMINI-001",
+      "description": "Add Gemini API for dynamic script generation",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T10:12:00Z",
+      "project": "ContentEngin"
+    },
+    {
+      "task_id": "GHL-RESEARCH-001",
+      "description": "Finalize GHL vs Custom Build recommendation",
+      "assigned_agent": "max",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T10:12:00Z",
+      "project": "GHL"
+    },
+    {
+      "task_id": "BLACKBOARD-001",
+      "description": "System Blackboard + Discord Notification Engine",
+      "assigned_agent": "aris",
+      "status": "SUCCESS",
+      "last_verified_timestamp": "2026-03-08T10:10:00Z",
+      "project": "Infrastructure"
+    },
+    {
+      "task_id": "GIT-SYNC-001",
+      "description": "Git-based workspace sync between Aris and Nexus",
+      "assigned_agent": "aris",
+      "status": "SUCCESS",
+      "last_verified_timestamp": "2026-03-08T09:40:00Z",
+      "project": "Infrastructure"
+    },
+    {
+      "task_id": "NEXUS-PAIR-001",
+      "description": "Pair Nexus as node to VPS gateway",
+      "assigned_agent": "aris",
+      "status": "SUCCESS",
+      "last_verified_timestamp": "2026-03-08T09:55:00Z",
+      "project": "Infrastructure"
+    }
+  ],
+  "last_sync": "2026-03-08T10:12:00Z",
   "metadata": {
     "version": "1.0",
     "description": "System Blackboard - Single Source of Truth for all tasks"
