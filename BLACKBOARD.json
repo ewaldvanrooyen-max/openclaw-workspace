@@ -4,7 +4,7 @@
       "task_id": "IC-POPIA-001",
       "description": "POPIA verification flow for Finance Workflow",
       "assigned_agent": "lux",
-      "status": "ACTIVE",
+      "status": "SUCCESS",
       "last_verified_timestamp": "2026-03-08T11:43:50+00:00",
       "project": "Interlinked Capital"
     },
