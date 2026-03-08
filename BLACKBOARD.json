@@ -12,8 +12,8 @@
       "task_id": "IC-FOLLOWUP-001",
       "description": "48-hour follow-up cron (8am SA) for INCOMPLETE/PENDING leads",
       "assigned_agent": "jiles",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-08T10:12:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-08T11:51:50+00:00",
       "project": "Interlinked Capital"
     },
     {
