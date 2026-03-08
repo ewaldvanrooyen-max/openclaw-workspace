@@ -41,6 +41,15 @@
       "project": "GHL"
     },
     {
+      "task_id": "INCOME-001",
+      "description": "PERMANENT: Autonomous Income Research - Search for revenue opportunities, document, present plans to E-man for approval",
+      "assigned_agent": "jiles",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-08T11:46:00Z",
+      "project": "Empire Funding",
+      "priority": "PERMANENT"
+    },
+    {
       "task_id": "BLACKBOARD-001",
       "description": "System Blackboard + Discord Notification Engine",
       "assigned_agent": "aris",
