@@ -44,7 +44,7 @@
       "task_id": "INCOME-001",
       "description": "PERMANENT: Autonomous Income Research - Search for revenue opportunities, document, present plans to E-man for approval",
       "assigned_agent": "jiles",
-      "status": "ACTIVE",
+      "status": "SUCCESS",
       "last_verified_timestamp": "2026-03-08T11:46:00Z",
       "project": "Empire Funding",
       "priority": "PERMANENT"
@@ -72,6 +72,15 @@
       "status": "ACTIVE",
       "last_verified_timestamp": "2026-03-08T16:00:02+00:00",
       "project": "Empire Infrastructure"
+    },
+    {
+      "task_id": "AFRIKAANS-001",
+      "description": "Learn Afrikaans: Read Afrikaans news/articles, document new vocabulary, post learnings to #empire-funding. Goal: Become fluent enough to understand client communications.",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T17:21:00Z",
+      "project": "Empire Skills",
+      "priority": "PERMANENT"
     },
     {
       "task_id": "OPTIMIZE-001",
