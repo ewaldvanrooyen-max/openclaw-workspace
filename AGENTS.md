@@ -222,6 +222,10 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 - **Lux** - Code execution ⚡
 - **Jiles** - Research & discovery 🔍
 
+### Empire Expansion (Nexus Local)
+- **Socials** - Intelligence gatherer 📡 (on Nexus)
+- **Skills** - Skills architect ⚙️ (on Nexus)
+
 ### Health Loop (Aris ↔ Nexus)
 - **Aris (VPS)** checks on Nexus: quarter past (15, 30, 45 min)
 - **Nexus (local)** checks on Aris: hour (00) and half-past (30)
