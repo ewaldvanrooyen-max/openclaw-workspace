@@ -60,10 +60,18 @@
     {
       "task_id": "CE-AUDIT-001",
       "description": "Deep audit of ContentEngin 4 workflows (Demo, Narrator, Teacher, Closer). Document what works, what's broken, what's needed for local testing.",
-      "assigned_agent": "max",
+      "assigned_agent": "lux",
       "status": "PENDING",
       "last_verified_timestamp": "2026-03-08T14:00:00Z",
       "project": "ContentEngin"
+    },
+    {
+      "task_id": "BROWSER-001",
+      "description": "Research: Best headless browsers for scraping (Playwright, Puppeteer, etc). Compare speed, reliability, anti-detection features. Recommend for Empire use.",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-08T14:04:00Z",
+      "project": "Empire Infrastructure"
     },
     {
       "task_id": "BLACKBOARD-001",
