@@ -202,8 +202,8 @@
       "task_id": "GHL-SCRAPER-001",
       "description": "Build Lead Scraper: Find businesses from directories, social media, Google Maps. Output: Business name, contact, website, location.",
       "assigned_agent": "jiles",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T14:00:01+00:00",
       "project": "GHL Autonomous Layer"
     },
     {
