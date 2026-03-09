@@ -186,8 +186,8 @@
       "task_id": "VIDEO-002",
       "description": "RERUN: Research free video generation limits per hour - HuggingFace, Runway, Fal AI, Replicate. Focus on: How many videos/images FREE per hour? What are the rate limits? Runway is option for paid (cheapest).",
       "assigned_agent": "jiles",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:28:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T12:00:02+00:00",
       "project": "ContentEngin"
     },
     {
