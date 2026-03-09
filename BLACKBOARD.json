@@ -146,8 +146,8 @@
       "task_id": "DEVICE-001",
       "description": "Get cheap Android device for social media accounts (dedicated)",
       "assigned_agent": "aris",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:13:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T07:00:02+00:00",
       "project": "Empire Infrastructure"
     },
     {
