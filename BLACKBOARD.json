@@ -210,8 +210,8 @@
       "task_id": "GHL-VERIFIER-001",
       "description": "Build Lead Verifier: Validate leads, enrich with business data (phone, email, social). Cross-reference with CRM.",
       "assigned_agent": "jiles",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T15:00:02+00:00",
       "project": "GHL Autonomous Layer"
     },
     {
