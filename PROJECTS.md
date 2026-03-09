@@ -91,6 +91,14 @@ AI-driven content factory for Overlay Economy. Dual-core brain (Gemini), renderi
 - [ ] Paddle integration (African payments) + Stripe for affiliate payouts
 - [ ] Asset library - start with 500 (have some in bucket + HuggingFace cron)
 
+**Phase 4: Later Expansion (Empire Revenue)**
+- [ ] Tier 1: Affiliate Marketing (leverage IC web-audit clients)
+- [ ] Tier 1: Digital Products (SEO guides, templates)
+- [ ] Tier 2: Print-on-Demand (branded merchandise)
+- [ ] Tier 2: Online Courses (monetize expertise)
+- [ ] Tier 3: SaaS Tools (web audit automation)
+- [ ] Tier 3: Dropshipping
+
 ---
 
 ## 3. GHL (GoHighLevel)
