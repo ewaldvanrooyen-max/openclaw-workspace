@@ -229,6 +229,14 @@
       "status": "PENDING",
       "last_verified_timestamp": "2026-03-09T04:39:00Z",
       "project": "GHL Autonomous Layer"
+    },
+    {
+      "task_id": "QWEN-LOCAL-001",
+      "description": "Research: Can we run Qwen 3.5 (3B parameters) locally on VPS? Check RAM, CPU requirements, inference speed, reliability. Compare Ollama vs llama.cpp vs other runtimes.",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T05:41:00Z",
+      "project": "Empire Infrastructure"
     }
   ],
   "last_sync": "2026-03-08T10:12:00Z",
