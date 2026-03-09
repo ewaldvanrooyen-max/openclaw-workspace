@@ -178,8 +178,8 @@
       "task_id": "SECRETAGENT-SKILL-001",
       "description": "Create OpenClaw skill for SecretAgent/Hero (anti-detection scraping). Alternative to Playwright for hard-to-scrape sites. Note: Human-browsing may also work as alternative.",
       "assigned_agent": "lux",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:23:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T11:00:01+00:00",
       "project": "Empire Infrastructure"
     },
     {
