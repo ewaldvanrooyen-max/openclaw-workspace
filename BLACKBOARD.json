@@ -226,8 +226,8 @@
       "task_id": "GHL-NEGOTIATOR-001",
       "description": "Design Negotiator: AI email back-and-forth handling (objections, follow-ups) via GHL inbox",
       "assigned_agent": "max",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T17:00:01+00:00",
       "project": "GHL Autonomous Layer"
     },
     {
