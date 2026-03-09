@@ -61,7 +61,7 @@
       "task_id": "CE-AUDIT-001",
       "description": "Deep audit of ContentEngin 4 workflows (Demo, Narrator, Teacher, Closer). Document what works, what's broken, what's needed for local testing.",
       "assigned_agent": "lux",
-      "status": "ACTIVE",
+      "status": "SUCCESS",
       "last_verified_timestamp": "2026-03-08T15:28:30+00:00",
       "project": "ContentEngin"
     },
