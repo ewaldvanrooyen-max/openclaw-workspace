@@ -73,7 +73,8 @@
       "assigned_agent": "jiles",
       "status": "SUCCESS",
       "last_verified_timestamp": "2026-03-08T16:00:02+00:00",
-      "project": "Empire Infrastructure"
+      "project": "Empire Infrastructure",
+      "notes": "Approved: Playwright default. SecretAgent skill to build. Human-browsing noted."
     },
     {
       "task_id": "IC-CHANNEL-001",
@@ -159,11 +160,75 @@
     },
     {
       "task_id": "NANOBOT-001",
-      "description": "Research: Nanobot or similar automation on Android device for social media posting. Auto-like, auto-follow, scheduling.",
+      "description": "Research: Android automation app for receiving Google notifications, auto-liking, auto-follow, posting. Nanobot or similar - lightweight, works on old hardware. Goal: Handle notifications, DMs, posting from cheap Android.",
       "assigned_agent": "jiles",
       "status": "PENDING",
       "last_verified_timestamp": "2026-03-09T04:13:00Z",
       "project": "Empire Infrastructure"
+    },
+    {
+      "task_id": "PLAYWRIGHT-001",
+      "description": "Install Playwright on VPS. npm install -g playwright. Test with basic scrape.",
+      "assigned_agent": "lux",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:23:00Z",
+      "project": "Empire Infrastructure"
+    },
+    {
+      "task_id": "SECRETAGENT-SKILL-001",
+      "description": "Create OpenClaw skill for SecretAgent/Hero (anti-detection scraping). Alternative to Playwright for hard-to-scrape sites. Note: Human-browsing may also work as alternative.",
+      "assigned_agent": "lux",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:23:00Z",
+      "project": "Empire Infrastructure"
+    },
+    {
+      "task_id": "VIDEO-002",
+      "description": "RERUN: Research free video generation limits per hour - HuggingFace, Runway, Fal AI, Replicate. Focus on: How many videos/images FREE per hour? What are the rate limits? Runway is option for paid (cheapest).",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:28:00Z",
+      "project": "ContentEngin"
+    },
+    {
+      "task_id": "CLAWHUB-001",
+      "description": "Search https://github.com/VoltAgent/awesome-openclaw-skills for useful skills. Build/import any that help Empire: scraping, automation, social media, etc.",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:28:00Z",
+      "project": "Empire Skills"
+    },
+    {
+      "task_id": "GHL-SCRAPER-001",
+      "description": "Build Lead Scraper: Find businesses from directories, social media, Google Maps. Output: Business name, contact, website, location.",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "project": "GHL Autonomous Layer"
+    },
+    {
+      "task_id": "GHL-VERIFIER-001",
+      "description": "Build Lead Verifier: Validate leads, enrich with business data (phone, email, social). Cross-reference with CRM.",
+      "assigned_agent": "jiles",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "project": "GHL Autonomous Layer"
+    },
+    {
+      "task_id": "GHL-QUOTE-001",
+      "description": "Build Quote Generator: Auto-generate finance quotes from audit data \u2192 send via GHL (email/WhatsApp)",
+      "assigned_agent": "lux",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "project": "GHL Autonomous Layer"
+    },
+    {
+      "task_id": "GHL-NEGOTIATOR-001",
+      "description": "Design Negotiator: AI email back-and-forth handling (objections, follow-ups) via GHL inbox",
+      "assigned_agent": "max",
+      "status": "PENDING",
+      "last_verified_timestamp": "2026-03-09T04:39:00Z",
+      "project": "GHL Autonomous Layer"
     }
   ],
   "last_sync": "2026-03-08T10:12:00Z",
