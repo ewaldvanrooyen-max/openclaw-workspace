@@ -138,8 +138,8 @@
       "task_id": "SIM-SA-001",
       "description": "Get MTN Superflex SIM for social media accounts (South Africa)",
       "assigned_agent": "aris",
-      "status": "PENDING",
-      "last_verified_timestamp": "2026-03-09T04:13:00Z",
+      "status": "ACTIVE",
+      "last_verified_timestamp": "2026-03-09T06:00:01+00:00",
       "project": "Empire Infrastructure"
     },
     {
