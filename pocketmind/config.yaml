@@ -1,26 +1,46 @@
 # PocketMind Configuration
 
-# Default settings - these can be overridden
+# ============================================
+# MODEL OPTIONS
+# ============================================
+# Choose a model that fits your device:
+#
+# Available presets:
+#   - smollm2     : SmolLM2-360M (180MB) - Fastest, lightest
+#   - qwen2.5     : Qwen2.5-0.5B (350MB) - Balanced quality/speed  
+#   - llama3.2    : Llama3.2-1B (640MB) - Best quality, slower
+#
+# Usage: python main.py --model-preset qwen2.5
+# Or manually specify path below
 
-# Model settings
+# Model preset (uncomment one or specify manually)
+model_preset: "smollm2"  # smollm2, qwen2.5, or llama3.2
+
+# Manual model configuration (used if model_preset not set or as override)
 model:
   path: "models/smollm2-360m-instruct-q4_k_m.gguf"
   context_length: 512
   threads: 4
   gpu_layers: 0
 
-# Generation defaults
+# ============================================
+# GENERATION DEFAULTS
+# ============================================
 generation:
   max_tokens: 256
   temperature: 0.7
   top_p: 0.9
   repeat_penalty: 1.1
 
-# Storage
+# ============================================
+# STORAGE
+# ============================================
 storage:
   data_dir: "~/.pocketmind/data"
 
+# ============================================
 # UI
+# ============================================
 ui:
   show_typing_indicator: true
   save_history: true

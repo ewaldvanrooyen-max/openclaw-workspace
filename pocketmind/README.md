@@ -47,17 +47,19 @@ pip install -r requirements.txt
 
 ### 2. Download a Model
 
-Place a GGUF model file in the `models/` directory. Recommended:
+**Option A: Use the download script (recommended)**
+```bash
+# Interactive selection
+python download_model.py
 
-| Model | Size | RAM Needed | Best For |
-|-------|------|------------|----------|
-| **SmolLM2-360M** | 180MB | 500MB-1GB | Ultra-light, fastest |
-| **Qwen2.5-0.5B** | 350MB | 1-2GB | Balanced quality/speed |
-| **TinyLlama** | 640MB | 2-3GB | Good quality |
+# Or specify a model directly
+python download_model.py --preset qwen2.5
+python download_model.py --preset smollm2
+python download_model.py --preset llama3.2
+```
 
-Download from [HuggingFace](https://huggingface.co/TheBloke):
-- https://huggingface.co/TheBloke/SmolLM2-360M-Instruct-GGUF
-- https://huggingface.co/TheBloke/Qwen2.5-0.5B-Instruct-GGUF
+**Option B: Manual download**
+Place a GGUF model file in the `models/` directory.
 
 ### 3. Run
 
@@ -71,6 +73,37 @@ python main.py --onboard
 # Start chatting
 python main.py
 ```
+
+---
+
+## Model Options
+
+PocketMind supports multiple models. Choose based on your device's RAM:
+
+| Model | Preset | Size | RAM Needed | Best For |
+|-------|--------|------|------------|----------|
+| **SmolLM2-360M** | `smollm2` | 180MB | 500MB-1GB | Ultra-light, fastest |
+| **Qwen2.5-0.5B** | `qwen2.5` | 350MB | 1-2GB | ✅ **Recommended** - Balanced |
+| **Llama3.2-1B** | `llama3.2` | 640MB | 2-3GB | Best quality |
+
+### Model Selection
+
+```bash
+# Using preset (recommended)
+python main.py --preset qwen2.5
+
+# Using manual path
+python main.py -m models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+
+# Or edit config.yaml
+# model_preset: "qwen2.5"
+```
+
+### Performance Notes
+
+- **SmolLM2**: Fastest startup, lowest RAM. Good for older phones.
+- **Qwen2.5**: Best balance. Recommended for most users.
+- **Llama3.2**: Best response quality. Slower on mobile.
 
 ---
 
@@ -104,7 +137,8 @@ python main.py
 python main.py [OPTIONS]
 
 Options:
-  -m, --model PATH       Model file path (default: models/smollm2-360m-instruct-q4_k_m.gguf)
+  -m, --model PATH       Model file path
+  -p, --preset NAME      Use preset (smollm2, qwen2.5, llama3.2)
   -c, --context-length  Context length (default: 512)
   -t, --threads NUM     CPU threads (default: 4)
   -v, --verbose         Verbose output
@@ -134,6 +168,8 @@ Options:
 ```
 pocketmind/
 ├── main.py                 # Entry point
+├── download_model.py       # Model downloader
+├── config.yaml             # Configuration
 ├── agent/
 │   └── brain.py            # Model loading & inference
 ├── cli/
@@ -155,7 +191,12 @@ pocketmind/
 ## Troubleshooting
 
 ### "Model not found"
-Download a GGUF model and place it in the `models/` directory.
+```bash
+# Use the downloader
+python download_model.py --preset qwen2.5
+
+# Or manually download a GGUF model to models/
+```
 
 ### "llama-cpp-python not installed"
 ```bash
@@ -163,25 +204,35 @@ pip install llama-cpp-python
 ```
 
 ### Slow performance
+- Use a smaller model: `python main.py --preset smollm2`
 - Reduce context length: `-c 256`
 - Reduce threads: `-t 2`
-- Try a smaller model (SmolLM2-360M)
 
 ### Out of memory
-- Use a smaller model
-- Reduce context length
+- Use SmolLM2 preset (lowest RAM)
+- Reduce context length: `-c 256`
 - Close other apps
 
 ---
 
-## What's Next?
+## Configuration
 
-The MVP is ready! Future enhancements:
+Edit `config.yaml` to customize defaults:
 
-- [ ] Voice input (Whisper.cpp)
-- [ ] Mobile app wrapper (Flutter)
-- [ ] Better models (Qwen2.5-0.5B, Llama3.2-1B)
-- [ ] Cloud backup sync (optional paid tier)
+```yaml
+# Model preset: smollm2, qwen2.5, or llama3.2
+model_preset: "qwen2.5"
+
+model:
+  path: "models/qwen2.5-0.5b-instruct-q4_k_m.gguf"
+  context_length: 512
+  threads: 4
+  gpu_layers: 0
+
+generation:
+  max_tokens: 256
+  temperature: 0.7
+```
 
 ---
 

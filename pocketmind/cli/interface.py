@@ -2,6 +2,7 @@
 PocketMind CLI Interface
 
 The main terminal interface for interacting with PocketMind.
+Supports backup/sync commands for premium users.
 """
 
 import sys
@@ -20,16 +21,21 @@ class CLI:
     Command-line interface for PocketMind.
     
     Handles user input and displays AI responses.
+    Supports optional voice input (STT) and voice output (TTS).
     """
     
-    def __init__(self, brain=None):
+    def __init__(self, brain=None, voice_input=None, voice_output=None):
         """
         Initialize the CLI.
         
         Args:
             brain: Brain instance for generating responses
+            voice_input: VoiceInput instance for speech-to-text
+            voice_output: VoiceOutput instance for text-to-speech
         """
         self.brain = brain
+        self.voice_input = voice_input
+        self.voice_output = voice_output
         self.history = []
         self.running = False
         
@@ -88,14 +94,50 @@ class CLI:
         """Get user input with prompt."""
         try:
             name = self.profile.get("name", "User") if self.profile else "User"
-            prompt = f"\n[{name}] > "
             
-            if HAS_READCHAR:
-                sys.stdout.write(prompt)
+            # Show voice indicator in prompt if voice is available
+            voice_indicator = ""
+            if self.voice_input:
+                voice_indicator = " 🎤(speak)"
+            elif self.voice_output:
+                voice_indicator = " 🔊"
+            
+            prompt = f"\n[{name}]{voice_indicator}> "
+            
+            # Check for voice input first
+            if self.voice_input:
+                print(prompt, end="")
                 sys.stdout.flush()
-                return input().strip()
+                
+                # Check if user wants to type instead
+                key = readchar.readkey()
+                
+                if key == '\n' or key == '\r':
+                    # Enter pressed - use voice input
+                    try:
+                        text = self.voice_input.listen(timeout=5, phrase_time_limit=10)
+                        if text:
+                            print(f"   You said: {text}")
+                            return text
+                        else:
+                            return ""  # No speech detected
+                    except Exception as e:
+                        print(f"⚠ Voice input error: {e}")
+                        return input().strip()
+                elif key == 't':
+                    # 't' key - switch to text input
+                    return input(" > ").strip()
+                else:
+                    # Other key - treat as text input
+                    text = input(" > ").strip()
+                    return key + text
             else:
-                return input(prompt).strip()
+                if HAS_READCHAR:
+                    sys.stdout.write(prompt)
+                    sys.stdout.flush()
+                    return input().strip()
+                else:
+                    return input(prompt).strip()
                 
         except (KeyboardInterrupt, EOFError):
             raise
@@ -125,6 +167,27 @@ class CLI:
             flow = OnboardingFlow()
             flow.run()
             self._load_profile()
+            return
+        
+        # Cloud sync commands
+        if user_input.lower() in ["backup", "backup now"]:
+            self._run_backup()
+            return
+        
+        if user_input.lower() == "restore":
+            self._run_restore()
+            return
+        
+        if user_input.lower() == "sync":
+            self._run_sync()
+            return
+        
+        if user_input.lower() == "sync status":
+            self._show_sync_status()
+            return
+        
+        if user_input.lower() == "list backups":
+            self._list_backups()
             return
         
         # Generate response
@@ -200,18 +263,37 @@ class CLI:
                 line += " " + word if line else word
         if line:
             print(f"   {line}")
+        
+        # Speak response if voice output is enabled
+        if self.voice_output:
+            self.voice_output.speak(response, block=False)
+        
         print()
     
     def _show_help(self):
         """Show help message."""
-        print("""
+        # Check if cloud sync is available
+        cloud_sync_line = ""
+        try:
+            from cloud_sync import CloudSync
+            if CloudSync().can_use_cloud():
+                cloud_sync_line = "   sync         - Sync backup to cloud\n"
+            else:
+                cloud_sync_line = "   sync status  - Show sync status (premium)\n"
+        except Exception:
+            pass
+        
+        print(f"""
 📖 Available Commands:
    help, h, ?    - Show this help message
    quit, exit, q - Exit the program
    clear         - Clear the screen
    profile       - Show user profile
    onboard       - Run onboarding setup
-""")
+   backup        - Create a local backup
+   restore       - Restore from a backup
+   list backups  - Show available backups
+{cloud_sync_line}""")
     
     def _show_profile(self):
         """Show user profile."""
@@ -223,3 +305,100 @@ class CLI:
                 if key != "important_dates":  # Skip complex nested data
                     print(f"   {key}: {value}")
         print()
+    
+    def _run_backup(self):
+        """Run backup command."""
+        try:
+            from cloud_sync import CloudSync
+            sync = CloudSync()
+            print("\n📦 Creating backup...")
+            result = sync.create_backup()
+            if result:
+                print(f"✅ Backup created!")
+        except Exception as e:
+            print(f"❌ Backup error: {e}")
+    
+    def _run_restore(self):
+        """Run restore command."""
+        try:
+            from cloud_sync import CloudSync
+            sync = CloudSync()
+            backups = sync.list_backups()
+            if not backups:
+                print("\n📭 No backups found.")
+                return
+            
+            print("\nAvailable backups:")
+            for i, b in enumerate(backups[:5], 1):
+                print(f"   {i}. {b['name']}")
+            
+            choice = input("\nRestore which? (number or name): ").strip()
+            
+            if choice.isdigit():
+                idx = int(choice) - 1
+                if 0 <= idx < len(backups):
+                    name = backups[idx]["name"]
+                else:
+                    print("❌ Invalid selection")
+                    return
+            else:
+                name = choice
+            
+            confirm = input(f"Restore '{name}'? (y/N): ").strip().lower()
+            if confirm == 'y':
+                sync.restore_backup(name=name)
+        except Exception as e:
+            print(f"❌ Restore error: {e}")
+    
+    def _run_sync(self):
+        """Run cloud sync command."""
+        try:
+            from cloud_sync import CloudSync
+            sync = CloudSync()
+            
+            if not sync.can_use_cloud():
+                print("\n💎 Cloud sync requires premium subscription!")
+                print("   Run: python main.py --set-tier premium")
+                return
+            
+            print("\n☁️ Syncing to cloud...")
+            sync.sync_to_cloud()
+        except Exception as e:
+            print(f"❌ Sync error: {e}")
+    
+    def _show_sync_status(self):
+        """Show sync status."""
+        try:
+            from cloud_sync import CloudSync
+            sync = CloudSync()
+            status = sync.get_status()
+            
+            tier = status["tier"].upper()
+            print(f"\n☁️ Sync Status")
+            print(f"   Tier: {'🟢' if status['can_cloud_sync'] else '⚪'} {tier}")
+            print(f"   Provider: {status['provider']}")
+            print(f"   Last sync: {status['last_sync'] or 'Never'}")
+            print(f"   Backups: {status['backup_count']}")
+            
+            if not status['can_cloud_sync']:
+                print("\n💎 Upgrade to premium for cloud sync!")
+        except Exception as e:
+            print(f"❌ Status error: {e}")
+    
+    def _list_backups(self):
+        """List backups."""
+        try:
+            from cloud_sync import CloudSync
+            sync = CloudSync()
+            backups = sync.list_backups()
+            
+            print("\n📋 Backups:")
+            if not backups:
+                print("   No backups yet. Run 'backup' to create one.")
+            else:
+                for b in backups:
+                    size_kb = b.get("size", 0) / 1024
+                    created = b.get("created", "")[:19]
+                    print(f"   • {b['name']} ({size_kb:.1f} KB, {created})")
+        except Exception as e:
+            print(f"❌ Error: {e}")

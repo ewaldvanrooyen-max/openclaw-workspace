@@ -10,5 +10,11 @@ pyyaml>=6.0
 # Input handling (optional but recommended)
 readchar>=1.0.0
 
+# Voice Features (optional but recommended)
+openai-whisper>=20231117  # Speech-to-text
+edge-tts>=6.1.0          # Text-to-speech
+sounddevice>=0.4.0       # Audio recording (optional)
+numpy>=1.24.0            # Audio processing (optional)
+
 # Standard library enhancements (optional)
 # colorama>=0.4.0  # For colored terminal output

@@ -1,0 +1,36 @@
+{
+  "model_list": [
+    {
+      "model_name": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4-6",
+      "api_key": "sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ],
+  "agents": {
+    "defaults": {
+      "workspace": "~/.picoclaw/workspace",
+      "model": "claude-sonnet",
+      "temperature": 0.7,
+      "max_tool_iterations": 20
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": false,
+      "token": "YOUR_BOT_TOKEN",
+      "allow_from": ["YOUR_USER_ID"]
+    }
+  },
+  "heartbeat": {
+    "enabled": true,
+    "interval": 30
+  },
+  "tools": {
+    "web": {
+      "duckduckgo": {
+        "enabled": true,
+        "max_results": 5
+      }
+    }
+  }
+}

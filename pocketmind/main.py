@@ -15,17 +15,40 @@ Usage:
 import argparse
 import sys
 import os
+import yaml
+from pathlib import Path
 
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from cli.interface import CLI
 from agent.brain import Brain, MockBrain, create_brain
+from voice import VoiceInput, VoiceOutput, check_voice_setup
+from cloud_sync import CloudSync, create_sync_instance
 
 
 # Constants
 APP_NAME = "PocketMind"
 APP_VERSION = "0.1.0"
+
+# Model presets - maps preset names to model paths
+MODEL_PRESETS = {
+    "smollm2": "models/smollm2-360m-instruct-q4_k_m.gguf",
+    "qwen2.5": "models/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "llama3.2": "models/llama3.2-1b-instruct-q4_k_m.gguf",
+}
+
+
+def load_config():
+    """Load configuration from config.yaml."""
+    config_path = Path(__file__).parent / "config.yaml"
+    if config_path.exists():
+        try:
+            with open(config_path, 'r') as f:
+                return yaml.safe_load(f)
+        except Exception:
+            pass
+    return {}
 
 
 def parse_args():
@@ -36,6 +59,7 @@ def parse_args():
         epilog="""
 Examples:
   python main.py                    # Start chatting
+  python main.py --preset qwen2.5  # Use Qwen2.5 model
   python main.py --onboard          # Set up your profile
   python main.py --test             # Test installation
   python main.py --mock             # Run without model
@@ -45,8 +69,14 @@ Examples:
     parser.add_argument(
         "--model", 
         "-m", 
-        default="models/smollm2-360m-instruct-q4_k_m.gguf",
-        help="Path to GGUF model file (default: models/smollm2-360m-instruct-q4_k_m.gguf)"
+        default=None,
+        help="Path to GGUF model file"
+    )
+    parser.add_argument(
+        "--preset",
+        "-p",
+        choices=list(MODEL_PRESETS.keys()),
+        help="Use a model preset (smollm2, qwen2.5, llama3.2)"
     )
     parser.add_argument(
         "--test", 
@@ -92,6 +122,65 @@ Examples:
         "--version",
         action="version",
         version=f"{APP_NAME} v{APP_VERSION}"
+    )
+    parser.add_argument(
+        "--voice-input",
+        action="store_true",
+        help="Enable voice input (speech-to-text)"
+    )
+    parser.add_argument(
+        "--voice-output",
+        action="store_true",
+        help="Enable voice output (text-to-speech)"
+    )
+    parser.add_argument(
+        "--voice-voice",
+        default="female",
+        choices=["female", "male", "british", "australian"],
+        help="Voice for TTS output (default: female)"
+    )
+    # Cloud sync commands
+    parser.add_argument(
+        "--backup",
+        action="store_true",
+        help="Create a local backup"
+    )
+    parser.add_argument(
+        "--restore",
+        nargs="?",
+        const="latest",
+        help="Restore from backup (specify name or 'latest')"
+    )
+    parser.add_argument(
+        "--sync-status",
+        action="store_true",
+        help="Show cloud sync status"
+    )
+    parser.add_argument(
+        "--list-backups",
+        action="store_true",
+        help="List all available backups"
+    )
+    parser.add_argument(
+        "--verify-backup",
+        metavar="NAME",
+        help="Verify backup integrity"
+    )
+    parser.add_argument(
+        "--delete-backup",
+        metavar="NAME",
+        help="Delete a backup"
+    )
+    parser.add_argument(
+        "--set-tier",
+        metavar="TIER",
+        choices=["free", "premium", "enterprise"],
+        help="Set subscription tier (free/premium/enterprise)"
+    )
+    parser.add_argument(
+        "--sync-to-cloud",
+        action="store_true",
+        help="Sync backup to cloud (premium only)"
     )
     return parser.parse_args()
 
@@ -269,7 +358,30 @@ def main():
     """Main entry point."""
     args = parse_args()
     
-    # Test mode
+    # Load config for defaults
+    config = load_config()
+    
+    # Determine model path
+    # Priority: --preset > --model > config > default
+    model_path = None
+    
+    # Check preset first
+    if args.preset:
+        model_path = MODEL_PRESETS[args.preset]
+        print(f"📦 Using preset: {args.preset}")
+    elif args.model:
+        model_path = args.model
+    elif config.get('model_preset'):
+        preset = config['model_preset']
+        if preset in MODEL_PRESETS:
+            model_path = MODEL_PRESETS[preset]
+            print(f"📦 Using config preset: {preset}")
+        else:
+            model_path = config.get('model', {}).get('path', 'models/smollm2-360m-instruct-q4_k_m.gguf')
+    else:
+        # Default to config or fallback
+        model_path = config.get('model', {}).get('path', 'models/smollm2-360m-instruct-q4_k_m.gguf')
+    
     if args.test:
         success = test_mode()
         sys.exit(0 if success else 1)
@@ -292,12 +404,136 @@ def main():
             print("   You can still use PocketMind without completing onboarding.")
         return
     
+    # Cloud sync commands
+    sync = CloudSync()
+    
+    if args.backup:
+        print("📦 Creating backup...")
+        result = sync.create_backup()
+        if result:
+            print(f"\n✅ Backup created: {result}")
+        return
+    
+    if args.restore:
+        name = args.restore if args.restore != "latest" else None
+        print(f"🔄 Restoring backup...")
+        success = sync.restore_backup(name=name, latest=(args.restore == "latest"))
+        return
+    
+    if args.sync_status:
+        print("☁️ Cloud Sync Status")
+        print("=" * 50)
+        status = sync.get_status()
+        tier = status["tier"].upper()
+        tier_display = f"{'🟢' if status['can_cloud_sync'] else '⚪'} {tier}"
+        print(f"   Subscription: {tier_display}")
+        print(f"   Provider: {status['provider']}")
+        print(f"   Enabled: {status['enabled']}")
+        print(f"   Last sync: {status['last_sync'] or 'Never'}")
+        print(f"   Backups: {status['backup_count']}")
+        print(f"   Storage used: {status['storage_used'] / 1024:.1f} KB")
+        print(f"   Data dir: {status['data_dir']}")
+        if not status['can_cloud_sync']:
+            print("\n💎 Upgrade to premium for cloud sync!")
+            print("   python main.py --set-tier premium")
+        return
+    
+    if args.list_backups:
+        print("📋 Available Backups")
+        print("=" * 50)
+        backups = sync.list_backups()
+        if not backups:
+            print("   No backups found.")
+            print("   Run: python main.py --backup")
+        else:
+            for i, b in enumerate(backups, 1):
+                size_kb = b.get("size", 0) / 1024
+                created = b.get("created", "Unknown")[:19]
+                print(f"   {i}. {b['name']}")
+                print(f"      Size: {size_kb:.1f} KB | Created: {created}")
+        return
+    
+    if args.verify_backup:
+        print(f"🔍 Verifying backup: {args.verify_backup}")
+        print("=" * 50)
+        result = sync.verify_backup(args.verify_backup)
+        if result.get("valid"):
+            print("✅ Backup is valid!")
+        else:
+            print(f"❌ Backup invalid: {result.get('error')}")
+        return
+    
+    if args.delete_backup:
+        # Auto-confirm in non-interactive mode
+        confirm = "y"
+        try:
+            confirm = input(f"Delete backup '{args.delete_backup}'? [y/N]: ").strip().lower()
+        except EOFError:
+            pass
+        if confirm == 'y':
+            sync.delete_backup(args.delete_backup)
+        return
+    
+    if args.set_tier:
+        print(f"💳 Setting subscription tier: {args.set_tier}")
+        success = sync.set_tier(args.set_tier)
+        if success:
+            print(f"✅ Tier set to {args.set_tier.upper()}")
+            if args.set_tier == "free":
+                print("   Cloud sync disabled for free tier.")
+        else:
+            print(f"❌ Failed to set tier")
+        return
+    
+    if args.sync_to_cloud:
+        print("☁️ Syncing to cloud...")
+        success = sync.sync_to_cloud()
+        return
+    
     # Mock mode (no model required)
     if args.mock:
         print_banner()
         print("🎭 Running in mock mode (no model)\n")
         
-        cli = CLI(brain=MockBrain())
+        # Initialize voice components if requested
+        voice_input = None
+        voice_output = None
+        
+        if args.voice_input or args.voice_output:
+            print("🎤 Initializing voice features...")
+            voice_status = check_voice_setup()
+            
+            if args.voice_input and not voice_status["whisper"]:
+                print("⚠ Whisper not installed. Voice input disabled.")
+                args.voice_input = False
+            
+            if args.voice_output and not voice_status["edge_tts"]:
+                print("⚠ Edge TTS not installed. Voice output disabled.")
+                args.voice_output = False
+            
+            if args.voice_input:
+                try:
+                    voice_input = VoiceInput(model_size="tiny")
+                    print("✓ Voice input ready")
+                except Exception as e:
+                    print(f"⚠ Voice input error: {e}")
+                    args.voice_input = False
+            
+            if args.voice_output:
+                try:
+                    voice_output = VoiceOutput(voice=args.voice_voice)
+                    print(f"✓ Voice output ready ({args.voice_voice} voice)")
+                except Exception as e:
+                    print(f"⚠ Voice output error: {e}")
+                    args.voice_output = False
+            
+            print()
+        
+        cli = CLI(
+            brain=MockBrain(),
+            voice_input=voice_input if args.voice_input else None,
+            voice_output=voice_output if args.voice_output else None
+        )
         cli.run()
         return
     
@@ -358,7 +594,45 @@ def main():
     print(f"✓ Model loaded: {brain.model_name}")
     print(f"✓ Offline mode: Active (no network calls)\n")
     
-    cli = CLI(brain=brain)
+    # Initialize voice components if requested
+    voice_input = None
+    voice_output = None
+    
+    if args.voice_input or args.voice_output:
+        print("🎤 Initializing voice features...")
+        voice_status = check_voice_setup()
+        
+        if args.voice_input and not voice_status["whisper"]:
+            print("⚠ Whisper not installed. Voice input disabled.")
+            args.voice_input = False
+        
+        if args.voice_output and not voice_status["edge_tts"]:
+            print("⚠ Edge TTS not installed. Voice output disabled.")
+            args.voice_output = False
+        
+        if args.voice_input:
+            try:
+                voice_input = VoiceInput(model_size="tiny")
+                print("✓ Voice input ready")
+            except Exception as e:
+                print(f"⚠ Voice input error: {e}")
+                args.voice_input = False
+        
+        if args.voice_output:
+            try:
+                voice_output = VoiceOutput(voice=args.voice_voice)
+                print(f"✓ Voice output ready ({args.voice_voice} voice)")
+            except Exception as e:
+                print(f"⚠ Voice output error: {e}")
+                args.voice_output = False
+        
+        print()
+    
+    cli = CLI(
+        brain=brain,
+        voice_input=voice_input if args.voice_input else None,
+        voice_output=voice_output if args.voice_output else None
+    )
     cli.run()
 
 
