@@ -1,0 +1,14 @@
+# PocketMind Requirements
+# Core dependencies for running locally
+
+# LLM Inference
+llama-cpp-python>=0.2.0
+
+# Configuration
+pyyaml>=6.0
+
+# Input handling (optional but recommended)
+readchar>=1.0.0
+
+# Standard library enhancements (optional)
+# colorama>=0.4.0  # For colored terminal output

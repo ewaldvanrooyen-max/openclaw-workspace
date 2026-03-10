@@ -1,0 +1,27 @@
+# PocketMind Configuration
+
+# Default settings - these can be overridden
+
+# Model settings
+model:
+  path: "models/smollm2-360m-instruct-q4_k_m.gguf"
+  context_length: 512
+  threads: 4
+  gpu_layers: 0
+
+# Generation defaults
+generation:
+  max_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  repeat_penalty: 1.1
+
+# Storage
+storage:
+  data_dir: "~/.pocketmind/data"
+
+# UI
+ui:
+  show_typing_indicator: true
+  save_history: true
+  max_history: 100
