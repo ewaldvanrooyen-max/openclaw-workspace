@@ -77,14 +77,16 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 | Platform | Status | Account URL | Notes |
 |----------|--------|-------------|-------|
+| Website | ✅ LIVE | https://interlinkedcapital.co.za | Serving content! |
 | Twitter/X | NOT CREATED | - | Requires email + phone verification |
 | LinkedIn | NOT CREATED | - | Requires email + phone verification |
 | Facebook | NOT CREATED | - | Requires email + phone verification |
 | Instagram | NOT CREATED | - | Requires email + phone verification |
 
 ### Logo
-- **Status:** NOT FOUND - Website not currently live
-- **Action Needed:** Extract from website once live, or create new logo
+- **ic-logo.jpg** - /var/www/ic-website/ic-logo.jpg (37KB)
+- **mlc-logo.png** - /var/www/ic-website/images/mlc-logo.png (173KB)
+- **mlc-logo-signature.png** - /var/www/ic-website/images/mlc-logo-signature.png (390KB)
 
 ### Next Steps (Manual Action Required)
 1. **Make website live** - Get interlinkedcapital.co.za running
