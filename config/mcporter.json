@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "baseUrl": "http://localhost:3101/mcp"
+    }
+  },
+  "imports": []
+}

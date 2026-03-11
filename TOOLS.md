@@ -12,6 +12,12 @@
 - searxng (8080)
 - mlc-nginx (8888)
 
+## Nexus (Local Machine)
+- **Name:** aris-steyn-imedia-S2870
+- **Connection:** Via OpenClaw node (paired & connected)
+- **SSH:** aris-steyn@192.168.5.116 (local IP)
+- **Health Check:** Run `openclaw nodes status` to verify connection
+
 ## Credentials Location
 - Local vault: ~/.openclaw/credentials/
 - External backup: ~/Documents/credentials/
@@ -50,6 +56,45 @@ Things like:
 ## Why Separate?
 
 Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+
+---
+
+## Interlinked Capital (IC) - Social Media
+
+### Branding
+- **Business Name:** Interlinked Capital
+- **Tagline:** Fleet & Asset Finance Specialists
+- **Website:** interlinkedcapital.co.za
+- **Location:** South Africa
+- **Stakeholders:** E-man (70%), Mario (30%)
+
+### Available Credentials
+- **Business Email:** aris@interlinkedcapital.co.za (password: Aris123)
+- **Alternative Email:** ewald@interlinkedcapital.co.za (password: Test1234)
+- **Gmail (personal):** steynarisa@gmail.com / App password: mehutvectwkmsjse
+
+### Social Media Accounts Status
+
+| Platform | Status | Account URL | Notes |
+|----------|--------|-------------|-------|
+| Twitter/X | NOT CREATED | - | Requires email + phone verification |
+| LinkedIn | NOT CREATED | - | Requires email + phone verification |
+| Facebook | NOT CREATED | - | Requires email + phone verification |
+| Instagram | NOT CREATED | - | Requires email + phone verification |
+
+### Logo
+- **Status:** NOT FOUND - Website not currently live
+- **Action Needed:** Extract from website once live, or create new logo
+
+### Next Steps (Manual Action Required)
+1. **Make website live** - Get interlinkedcapital.co.za running
+2. **Extract/Create logo** - Pull from website or design new
+3. **Create accounts manually** - Each platform requires human verification:
+   - Twitter/X: x.com (business account)
+   - LinkedIn: linkedin.com/company/interlinked-capital
+   - Facebook: facebook.com/interlinkedcapital
+   - Instagram: @interlinkedcapital
+4. **Link accounts** - Add website URL and consistent bio across all platforms
 
 ---
 

@@ -250,6 +250,7 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 - **Nexus (local)** checks on Aris: hour (00) and half-past (30)
 - **Alert rule:** Only notify E-man if one is down
 - **Failover:** Nexus picks up jobs if VPS fails (and vice versa)
+- **2IC:** Nexus has write access when Aris is down
 
 ### Memory Protocol
 - **Aris is source of truth** - has write access to memory/docs
