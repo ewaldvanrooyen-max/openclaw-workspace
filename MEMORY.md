@@ -15,10 +15,16 @@
 
 ## Ongoing Projects
 
-- PocketMind: Privacy-first local AI agent (Phone Edition)
-- OpenClaw setup: VPS + Nexus pairing
-- WolfPack Empire business concepts
+- **PocketMind** - Privacy-first local AI agent (Phone Edition)
+- **OpenClaw setup** - VPS + Nexus pairing COMPLETE (Playwright works!)
+- **WolfPack Empire** - Ecosystem complete
+- **Socials** - Agent ready in /workspace/Socials/
+
+## Ecosystem
+
+- **VPS (Aris):** Max, Lux, Jiles
+- **Nexus (Local):** Nexus + 2 agents + Socials
 
 ---
 
-*Last updated: 2026-03-10*
+*Last updated: 2026-03-11*

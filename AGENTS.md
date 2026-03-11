@@ -231,17 +231,19 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 
 ## 🐺 Team (Aris - VPS Instance)
 
-### Core Team
+### Core Team (VPS)
 - **Aris** (you) - Chief of Staff / Lead Orchestrator 🎯
 - **Max** - Task breakdown & delegation 🧠
 - **Lux** - Code execution ⚡
 - **Jiles** - Research & discovery 🔍
 
-### Empire Expansion (Future - Nexus)
-- **Socials** - Intelligence gatherer 📡 (on Nexus)
-- **Skills** - Skills architect ⚙️ (on Nexus)
+### Local Machine (Nexus)
+- **Nexus** - Local machine (connected to VPS)
+- **Socials** - Intelligence gatherer 📡
+- + 2 additional agents
 
-Note: Nexus not currently connected. Empire runs on VPS until resolved.
+### Empire Expansion
+- **Skills** - Skills architect ⚙️
 
 ### Health Loop (Aris ↔ Nexus)
 - **Aris (VPS)** checks on Nexus: quarter past (15, 30, 45 min)
