@@ -85,7 +85,7 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 | Facebook | ✅ Created | @interlinkedcapital | steynaris@gmail.com / [REDACTED] |
 | Instagram | ✅ Created | @interlinkedcapital | steynaris@gmail.com / [REDACTED] |
 | Twitter/X | Needs setup | - | steynaris@gmail.com (Google auth) |
-| LinkedIn | Needs setup | - | steynaris@gmail.com (Google auth) |
+| LinkedIn | Needs setup | - | steynaris@gmail.com (Google auth ready) |
 
 ### Logo
 - **ic-logo.jpg** - /var/www/ic-website/ic-logo.jpg (37KB)
