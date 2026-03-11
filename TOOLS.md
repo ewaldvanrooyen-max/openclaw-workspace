@@ -79,13 +79,13 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ### Social Media Accounts Status
 
-| Platform | Status | Account URL | Notes |
-|----------|--------|-------------|-------|
-| Website | ✅ LIVE | https://interlinkedcapital.co.za | Serving content! |
-| Twitter/X | NOT CREATED | - | Requires email + phone verification |
-| LinkedIn | NOT CREATED | - | Requires email + phone verification |
-| Facebook | NOT CREATED | - | Requires email + phone verification |
-| Instagram | NOT CREATED | - | Requires email + phone verification |
+| Platform | Status | Account | Credentials |
+|----------|--------|---------|-------------|
+| Website | ✅ LIVE | https://interlinkedcapital.co.za | - |
+| Facebook | ✅ Created | @interlinkedcapital | steynaris@gmail.com / 1851xyxY* |
+| Instagram | ✅ Created | @interlinkedcapital | steynaris@gmail.com / 1851xyxY* |
+| Twitter/X | Needs setup | - | steynaris@gmail.com (Google auth) |
+| LinkedIn | Needs setup | - | steynaris@gmail.com (Google auth) |
 
 ### Logo
 - **ic-logo.jpg** - /var/www/ic-website/ic-logo.jpg (37KB)
