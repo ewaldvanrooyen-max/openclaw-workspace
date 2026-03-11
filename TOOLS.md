@@ -73,17 +73,17 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 - **Stakeholders:** E-man (70%), Mario (30%)
 
 ### Available Credentials
-- **Business Email:** aris@interlinkedcapital.co.za (password: Aris123)
-- **Alternative Email:** ewald@interlinkedcapital.co.za (password: Test1234)
-- **Gmail (personal):** steynarisa@gmail.com / App password: mehutvectwkmsjse
+- **Business Email:** aris@interlinkedcapital.co.za (password: [REDACTED])
+- **Alternative Email:** ewald@interlinkedcapital.co.za (password: [REDACTED])
+- **Gmail (personal):** steynarisa@gmail.com / App password: [REDACTED]
 
 ### Social Media Accounts Status
 
 | Platform | Status | Account | Credentials |
 |----------|--------|---------|-------------|
 | Website | ✅ LIVE | https://interlinkedcapital.co.za | - |
-| Facebook | ✅ Created | @interlinkedcapital | steynaris@gmail.com / 1851xyxY* |
-| Instagram | ✅ Created | @interlinkedcapital | steynaris@gmail.com / 1851xyxY* |
+| Facebook | ✅ Created | @interlinkedcapital | steynaris@gmail.com / [REDACTED] |
+| Instagram | ✅ Created | @interlinkedcapital | steynaris@gmail.com / [REDACTED] |
 | Twitter/X | Needs setup | - | steynaris@gmail.com (Google auth) |
 | LinkedIn | Needs setup | - | steynaris@gmail.com (Google auth) |
 
