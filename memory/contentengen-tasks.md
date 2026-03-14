@@ -21,19 +21,12 @@
 - [ ] Audit TTS quality
 - [ ] Verify TTS matches video visuals
 
-## Video Editing
-- [x] Research best local video editors (Jiles)
-- [ ] Set up editing pipeline
-- [ ] Integrate with TTS
-
-## Emerald Asset Library
-- [x] Created asset manifest (6,000 entries)
-- [x] Defined distribution (2,000 videos / 4,000 images)
-- [x] Defined aesthetic volumes (4)
-- [x] Added dark/conflict (20%)
-- [x] Created weekly deficit check script outline
-- [ ] Implement deficit check script
-- [ ] Set up cron generation
+## Video/Audio Storage
+- [x] Create organized folder structure on VPS
+- [x] Copy existing videos to library
+- [x] Create audit reports
+- [ ] Fix GCP credentials for cloud upload
+- [ ] Sync with GCS bucket (contentengen-asset-cache)
 
 ---
 *Added: 2026-03-14*
