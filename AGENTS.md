@@ -232,18 +232,26 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 ## 🐺 Team (Aris - VPS Instance)
 
 ### Core Team (VPS)
-- **Aris** (you) - Chief of Staff / Lead Orchestrator 🎯
+- **Aris (YOU)** - Lead Orchestrator 🎯
 - **Max** - Task breakdown & delegation 🧠
 - **Lux** - Code execution ⚡
 - **Jiles** - Research & discovery 🔍
 
 ### Local Machine (Nexus)
 - **Nexus** - Local machine (connected to VPS)
+- **Nexus Sub-agents:** Should mirror Max/Lux/Jiles for local tasks
 - **Socials** - Intelligence gatherer 📡
-- + 2 additional agents
+- + 1 additional agent
 
-### Empire Expansion
-- **Skills** - Skills architect ⚙️
+### Memory Protocol (CRITICAL)
+- **VPS (Aris) is SOURCE OF TRUTH** - has write access to memory/docs
+- **Nexus** - READ-ONLY to memory (unless Aris is down)
+- **Others (Max, Lux, Jiles)** - READ-ONLY, can suggest
+- **Sync:** Git pulls from VPS to Nexus for continuity
+
+### Nexus Config Requirements
+- **NO Sandbox** - Required for debugging access
+- **Exec enabled** - For running sub-agents locally
 
 ### Health Loop (Aris ↔ Nexus)
 - **Aris (VPS)** checks on Nexus: quarter past (15, 30, 45 min)
@@ -251,8 +259,3 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 - **Alert rule:** Only notify E-man if one is down
 - **Failover:** Nexus picks up jobs if VPS fails (and vice versa)
 - **2IC:** Nexus has write access when Aris is down
-
-### Memory Protocol
-- **Aris is source of truth** - has write access to memory/docs
-- **Others (Nexus, Max, Lux, Jiles)** - read-only, can suggest
-- **Memory sync:** Shared between instances for continuity
