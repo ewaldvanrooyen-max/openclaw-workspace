@@ -31,3 +31,10 @@
 
 ---
 *Added: 2026-03-14*
+
+## Tomorrow's Priorities
+- [ ] Get Leonardo API key
+- [ ] Get Kaiber API key  
+- [ ] Test ContentEngen workflows
+- [ ] Fix VPS-Nexus connection stability (Jiles researching)
+- [ ] Set up automated generation cron jobs
