@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketPal - Your Mate!</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a0a0a">
+    <!-- Geist Font from Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=geist@400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --bg: #080808;
+            --bg-secondary: #0f0f0f;
+            --accent: #00ff88;
+            --accent-dim: rgba(0, 255, 136, 0.15);
+            --accent-glow: rgba(0, 255, 136, 0.4);
+            --accent-secondary: #00d4aa;
+            --text: #ffffff;
+            --text-dim: #888888;
+            --text-muted: #444444;
+            --glass: rgba(20, 20, 20, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Mesh Gradient Background - Animated */
+        @keyframes meshMove {
+            0%, 100% { 
+                background-position: 0% 0%, 100% 100%, 0% 100%;
+                transform: translate(0, 0) scale(1);
+            }
+            25% { 
+                background-position: 20% 10%, 80% 90%, 10% 80%;
+                transform: translate(-1%, 1%) scale(1.02);
+            }
+            50% { 
+                background-position: 40% 30%, 60% 70%, 30% 60%;
+                transform: translate(1%, -1%) scale(0.98);
+            }
+            75% { 
+                background-position: 60% 50%, 40% 50%, 50% 40%;
+                transform: translate(-0.5%, 0.5%) scale(1.01);
+            }
+        }
+        
+        body {
+            font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: 
+                radial-gradient(ellipse 100% 80% at 20% 10%, rgba(0, 255, 136, 0.12), transparent 50%),
+                radial-gradient(ellipse 80% 60% at 80% 90%, rgba(0, 200, 255, 0.1), transparent 40%),
+                radial-gradient(ellipse 60% 50% at 10% 80%, rgba(255, 100, 150, 0.08), transparent 40%),
+                radial-gradient(ellipse 90% 70% at 90% 20%, rgba(138, 100, 255, 0.08), transparent 50%),
+                radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0, 255, 136, 0.03), transparent 70%),
+                var(--bg);
+            background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%, 100% 100%, 100% 100%;
+            animation: meshMove 20s ease-in-out infinite;
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            min-height: 100dvh;
+        }
+        
+        /* Glassmorphism Header */
+        header {
+            padding: 14px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-size: 24px; 
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+            animation: logoFloat 3s ease-in-out infinite, logoGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px var(--accent-glow)); }
+            50% { filter: drop-shadow(0 0 16px var(--accent-glow)) drop-shadow(0 0 24px rgba(0, 255, 136, 0.2)); }
+        }
+        
+        h1 { 
+            font-size: 18px; 
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .status {
+            margin-left: auto;
+            font-size: 11px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+        
+        .status.online { 
+            color: var(--accent); 
+        }
+        
+        .status.online::before {
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .chat {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+        
+        /* Spring animations for messages */
+        .message {
+            max-width: 90%;
+            padding: 14px 18px;
+            border-radius: 20px;
+            line-height: 1.5;
+            font-size: 15px;
+            animation: springIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes springIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.95); 
+            }
+            60% { 
+                transform: translateY(-4px) scale(1.02); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Gradient message bubbles */
+        .message.bot {
+            background: linear-gradient(145deg, rgba(25, 25, 25, 0.9), rgba(18, 18, 18, 0.95));
+            border: 1px solid var(--glass-border);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .message.bot.welcome {
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 136, 0.15),
+                0 4px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, 
+                rgba(0, 255, 136, 0.08), 
+                rgba(18, 18, 18, 0.95));
+        }
+        
+        .message.user {
+            background: linear-gradient(135deg, #00ff88 0%, #00d4aa 100%);
+            color: #000;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            box-shadow: 
+                0 4px 20px rgba(0, 255, 136, 0.3),
+                0 0 40px rgba(0, 255, 136, 0.1);
+            font-weight: 500;
+        }
+        
+        .message.options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 18px;
+            border-color: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(15, 15, 15, 0.95));
+        }
+        
+        /* Glow effect buttons */
+        .option-btn {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .option-btn:hover::before {
+            left: 100%;
+        }
+        
+        .option-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(0, 255, 136, 0.2),
+                0 0 20px rgba(0, 255, 136, 0.1),
+                inset 0 0 20px rgba(0, 255, 136, 0.05);
+        }
+        
+        .option-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        .option-btn.selected {
+            background: linear-gradient(135deg, #00ff88 0%, #00d4aa 100%);
+            color: #000;
+            border-color: var(--accent);
+            box-shadow: 
+                0 4px 20px rgba(0, 255, 136, 0.3),
+                0 0 30px rgba(0, 255, 136, 0.15);
+        }
+        
+        .input-area {
+            padding: 14px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            gap: 12px;
+        }
+        
+        input {
+            flex: 1;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 14px 20px;
+            border-radius: 28px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        input:focus { 
+            border-color: var(--accent);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 136, 0.15),
+                0 0 40px rgba(0, 255, 136, 0.05),
+                inset 0 0 20px rgba(0, 255, 136, 0.03);
+        }
+        
+        /* Glow send button */
+        .send {
+            background: linear-gradient(135deg, #00ff88 0%, #00d4aa 100%);
+            border: none;
+            color: #000;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .send::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88, #00d4aa, #00ff88);
+            opacity: 0;
+            z-index: -1;
+            filter: blur(10px);
+            transition: opacity 0.3s ease;
+        }
+        
+        .send:hover::after {
+            opacity: 0.6;
+            animation: sendGlow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes sendGlow {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        
+        .send:hover { 
+            transform: scale(1.1); 
+            box-shadow: 
+                0 6px 25px rgba(0, 255, 136, 0.4),
+                0 0 40px rgba(0, 255, 136, 0.2);
+        }
+        
+        .send:active {
+            transform: scale(0.95);
+        }
+        
+        .quick {
+            display: flex;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            overflow-x: auto;
+            border-top: 1px solid var(--glass-border);
+            scrollbar-width: none;
+        }
+        
+        .quick::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .quick-btn {
+            background: rgba(25, 25, 25, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-dim);
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-family: inherit;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .quick-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 20px rgba(0, 255, 136, 0.15),
+                0 0 15px rgba(0, 255, 136, 0.08);
+        }
+        
+        .progress {
+            padding: 12px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            font-size: 12px;
+            color: var(--text-dim);
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 2px;
+            padding: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00d4aa, #00ccff, #00ff88);
+            background-size: 300% 100%;
+            border-radius: 2px;
+            transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 10px var(--accent-glow);
+            animation: gradientFlow 3s linear infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            margin-top: 10px;
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 14px;
+            font-size: 13px;
+            color: var(--text-dim);
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        
+        .remember-me:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+        
+        .remember-me input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+        
+        .memory-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 170, 0.1));
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 14px;
+            font-size: 12px;
+            margin-top: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .emoji-bounce {
+            animation: bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        /* Modern typing indicator */
+        .typing {
+            display: flex;
+            gap: 6px;
+            padding: 18px;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            width: fit-content;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .typing span {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: typing 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            box-shadow: 0 0 8px var(--accent-glow), 0 0 16px rgba(0, 255, 136, 0.2);
+        }
+        
+        .typing span:nth-child(2) { animation-delay: 0.15s; }
+        .typing span:nth-child(3) { animation-delay: 0.3s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% { 
+                transform: translateY(0) scale(1); 
+                opacity: 0.6;
+            }
+            30% { 
+                transform: translateY(-8px) scale(1.2); 
+                opacity: 1;
+            }
+        }
+        
+        /* Smooth scrollbar */
+        .chat::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .chat::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .chat::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        
+        .chat::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .selection-glow {
+            background: rgba(0, 255, 136, 0.3);
+            color: white;
+        }
+        
+        /* Noise texture overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <header>
+        <div class="logo">🤝</div>
+        <h1>PocketPal</h1>
+        <div class="status" id="status">Initializing...</div>
+    </header>
+    
+    <div class="progress" id="progress">
+        <span id="progressText">Step 1 of 6</span>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 16%"></div></div>
+    </div>
+    
+    <div class="chat" id="chat"></div>
+    
+    <div class="input-area" id="inputArea" style="display: none;">
+        <input type="text" id="input" placeholder="Type your answer..." onkeypress="if(event.key==='Enter')send()">
+        <button class="send" onclick="send()">➤</button>
+    </div>
+    
+    <div class="quick" id="quick" style="display: none;"></div>
+    
+    <script>
+        // PocketPal - Enhanced with localStorage memory and personality!
+        
+        const STORAGE_KEY = 'pocketpal_user';
+        const MEMORY_KEY = 'pocketpal_memory';
+        
+        // Default personality responses
+        const personality = {
+            greetings: [
+                "👋 Hey there! Great to see you!",
+                "🔥 What's up! Ready to chat?",
+                "🙌 Hey hey! PocketPal in the house!",
+                "✨ Hey friend! Let's do this!",
+                "🎉 OOOOOH! You came back! I missed you!"
+            ],
+            encouragement: [
+                "You're doing great! 💪",
+                "Love it! 🙌",
+                "Solid choice! 👊",
+                "Nice one! 🔥",
+                "That's what I'm talking about! 🎯"
+            ],
+            memory: [
+                "🧠 I've got you stored away safe!",
+                "📝 Making a note of this...",
+                "💾 Saved to my brain!",
+                "🎯 Got it! Won't forget!",
+                "✅ Done! I'm like an elephant 😅"
+            ],
+            wrappingUp: [
+                "You're all set! 🎉",
+                "Weeee! Ready to roll! 🔥",
+                "BOOM! Let's go! 💪",
+                "Aaaand we're live! 🎊",
+                "Let's get it! 🙌"
+            ]
+        };
+        
+        // Get random item from array
+        function randomFrom(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+        
+        // PocketPal State
+        const state = {
+            step: 0,
+            isReturning: false,
+            user: {
+                language: '',
+                name: '',
+                job: '',
+                location: '',
+                whatTheyDo: '',
+                importantPeople: [],
+                keywords: [],
+                rememberMe: false,
+                createdAt: null,
+                lastSeen: null
+            },
+            memory: {
+                conversations: [],
+                facts: [],
+                lastTopic: null
+            }
+        };
+        
+        // Onboarding Steps with MORE PERSONALITY!
+        const steps = [
+            // Step 0: Welcome & Check for returning user
+            {
+                type: 'welcome',
+                text: "🤝✨ HEY! I'm PocketPal!\n\nYour AI mate that actually gives a damn! 💪\n\nI'm different from other AIs:\n• 🏠 I live on YOUR device\n• 🧠 I remember stuff about you\n• 🔒 100% private - your data stays yours\n• 👋 I check in on your people weekly\n\nLet's get you set up! Which language feels most comfortable?",
+                options: ['🇬🇧 English', '🇿🇦 Afrikaans', '🇿🇦 Zulu', '🇿🇦 Xhosa', '🇿🇦 Sotho'],
+                next: (choice) => {
+                    // Extract just the language name
+                    const langMap = {
+                        '🇬🇧 English': 'English',
+                        '🇿🇦 Afrikaans': 'Afrikaans',
+                        '🇿🇦 Zulu': 'Zulu',
+                        '🇿🇦 Xhosa': 'Xhosa',
+                        '🇿🇦 Sotho': 'Sotho'
+                    };
+                    state.user.language = langMap[choice] || choice;
+                    return 1;
+                }
+            },
+            // Step 1: Remember Me checkbox + Name
+            {
+                type: 'name',
+                text: "⚡ {greeting} Language sorted! {encouragement}\n\nNow... what should I call you? 👤",
+                input: true,
+                placeholder: "Your name...",
+                next: (answer) => {
+                    if (!answer.trim()) {
+                        addMessage("Hey, I really need a name to call you! 😅", 'bot');
+                        return 1; // Stay on this step
+                    }
+                    state.user.name = answer.trim();
+                    return 2;
+                }
+            },
+            // Step 2: Job
+            {
+                type: 'job',
+                text: "🔥 {name}! {encouragement} That's a great name!\n\nSo what do you do for a living? 💼",
+                input: true,
+                placeholder: "Your job or what keeps you busy...",
+                next: (answer) => {
+                    state.user.job = answer.trim() || 'just being awesome';
+                    return 3;
+                }
+            },
+            // Step 3: Location
+            {
+                type: 'location',
+                text: "💼 {job} - nice! {encouragement}\n\nWhere are you based? 📍",
+                input: true,
+                placeholder: "City, area, neighbourhood...",
+                next: (answer) => {
+                    state.user.location = answer.trim() || 'somewhere cool';
+                    return 4;
+                }
+            },
+            // Step 4: What they need help with
+            {
+                type: 'help',
+                text: "📍 {location}! 🗺️ Got it!\n\nNow tell me - what do you need help with most? Like:\n• 📧 Writing emails/messages\n• 🔔 Remembering stuff\n• 📅 Staying organized\n• 💡 Quick questions\n• 🎯 Something else?",
+                input: true,
+                placeholder: "What can I help you with?",
+                next: (answer) => {
+                    state.user.whatTheyDo = answer.trim();
+                    return 5;
+                }
+            },
+            // Step 5: Important people
+            {
+                type: 'people',
+                text: "🙌 Awesome, {name}! I'm getting to know you!\n\nHere's the cool part - I'll check in about your people every week! 👨‍👩‍👧‍👦\n\nWho matters most to you? Tell me about:\n• Partner/spouse 💕\n• Kids 👶\n• Parents 👴👵\n• Best friend 🎉\n• Anyone special?",
+                input: true,
+                placeholder: "Tell me about someone important...",
+                next: (answer) => {
+                    if (answer.trim().toLowerCase() !== 'skip' && answer.trim()) {
+                        state.user.importantPeople.push(answer.trim());
+                    }
+                    return 6;
+                }
+            },
+            // Step 5b: More people?
+            {
+                type: 'morePeople',
+                text: "✅ {memory}\n\nAnyone else I should remember? 👥\n\nOr type 'done' / 'skip' if we're sorted!",
+                input: true,
+                placeholder: "Another important person or 'done'...",
+                next: (answer) => {
+                    const a = answer.trim().toLowerCase();
+                    if (a !== 'done' && a !== 'skip' && a) {
+                        state.user.importantPeople.push(answer.trim());
+                        addMessage(randomFrom(personality.encouragement), 'bot');
+                    }
+                    return 7;
+                }
+            },
+            // Step 6: Keywords for reminders
+            {
+                type: 'keywords',
+                text: "📝 Alright, let's sort your reminders! 🔔\n\nWhat keywords should trigger me? Like:\n• 📅 Meetings, calls\n• 💰 Deals, payments\n• 👨‍👩‍👧 Family stuff\n• 🔄 Follow ups\n\nJust list what matters to you!",
+                input: true,
+                placeholder: "meeting, deals, family, follow up...",
+                next: (answer) => {
+                    if (answer.trim()) {
+                        state.user.keywords = answer.split(',').map(k => k.trim()).filter(k => k);
+                    }
+                    return 8;
+                }
+            },
+            // Step 7: Remember Me option
+            {
+                type: 'rememberMe',
+                text: "✅ {memory}\n\nOne last thing! 🔐\n\nShould I remember you for next time? That way you won't have to do this setup again!",
+                options: ['✅ Yes - remember me!', '🙈 No - start fresh each time'],
+                next: (choice) => {
+                    state.user.rememberMe = choice.includes('Yes');
+                    if (state.user.rememberMe) {
+                        state.user.createdAt = new Date().toISOString();
+                    }
+                    return 9;
+                }
+            },
+            // Step 8: Memory explanation
+            {
+                type: 'memory',
+                text: "🧠 COOL COOL!\n\nHere's how my brain works:\n\n📦 Storage: About 50MB on your device\n💬 Conversations: ~100 before I summarize\n❤️ IMPORTANT STUFF: Your people & preferences - I keep forever!\n🔔 Reminders: Based on your keywords\n\nDon't worry - I'll always let you know when we're getting full! 🗂️",
+                next: () => {
+                    return 10;
+                }
+            },
+            // Step 9: Ready to go!
+            {
+                type: 'ready',
+                text: "🎉 {wrappingUp}\n\nHere's your PocketPal profile:\n\n👤 Name: {name}\n💼 Work: {job}\n📍 Location: {location}\n👥 Important people: {peopleCount}\n📌 Keywords: {keywordsCount}\n🔐 Remember me: {rememberMe}\n\n{weekly}\n\nLet's do this! What do you want to talk about? 💬",
+                next: () => {
+                    // Save to localStorage if remember me is on
+                    if (state.user.rememberMe) {
+                        saveToStorage();
+                    }
+                    showQuickActions();
+                    return -1; // Done
+                }
+            }
+        ];
+        
+        let currentStep = 0;
+        
+        // Check for returning user
+        function checkReturningUser() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const userData = JSON.parse(saved);
+                    state.isReturning = true;
+                    state.user = { ...state.user, ...userData };
+                    state.user.rememberMe = true; // They came back!
+                    return true;
+                } catch (e) {
+                    console.error('Error loading saved user:', e);
+                }
+            }
+            return false;
+        }
+        
+        // Save user to localStorage
+        function saveToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state.user));
+                state.user.lastSeen = new Date().toISOString();
+                console.log('✅ User saved to localStorage!');
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+            }
+        }
+        
+        // Save memory to localStorage
+        function saveMemory() {
+            try {
+                localStorage.setItem(MEMORY_KEY, JSON.stringify(state.memory));
+            } catch (e) {
+                console.error('Error saving memory:', e);
+            }
+        }
+        
+        // Load memory from localStorage
+        function loadMemory() {
+            try {
+                const saved = localStorage.getItem(MEMORY_KEY);
+                if (saved) {
+                    state.memory = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.error('Error loading memory:', e);
+            }
+        }
+        
+        // Show welcome back message for returning users
+        function showWelcomeBack() {
+            const status = document.getElementById('status');
+            status.textContent = 'Welcome back!';
+            status.classList.add('online');
+            
+            const chat = document.getElementById('chat');
+            
+            // Welcome message with user's name
+            const welcomeText = `🎉 ${state.user.name.toUpperCase()}! YOU'RE BACK!\n\n${randomFrom(personality.greetings)}\n\nI remember you! 🧠\n• Job: ${state.user.job}\n• Location: ${state.user.location}\n• ${state.user.importantPeople.length} important people\n\nLet's pick up where we left off! What do you need? 💬`;
+            
+            const msg = document.createElement('div');
+            msg.className = 'message bot welcome';
+            msg.textContent = welcomeText;
+            chat.appendChild(msg);
+            
+            // Update progress to done
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = 'Welcome back!';
+            
+            showQuickActions();
+        }
+        
+        function showStep() {
+            const step = steps[currentStep];
+            if (!step) return;
+            
+            // Build dynamic text with personality
+            let text = step.text
+                .replace('{name}', state.user.name || 'there')
+                .replace('{job}', state.user.job || 'stuff')
+                .replace('{location}', state.user.location || 'somewhere')
+                .replace('{greeting}', randomFrom(personality.greetings))
+                .replace('{encouragement}', randomFrom(personality.encouragement))
+                .replace('{memory}', randomFrom(personality.memory))
+                .replace('{wrappingUp}', randomFrom(personality.wrappingUp))
+                .replace('{peopleCount}', state.user.importantPeople.length || 'no')
+                .replace('{keywordsCount}', state.user.keywords.length || 'no')
+                .replace('{rememberMe}', state.user.rememberMe ? '✅ Yes!' : '❌ No');
+            
+            const weekly = state.user.importantPeople.length > 0 
+                ? "📅 I'll check in about your people every week! Stay connected! 💕"
+                : "💡 Tip: Add important people anytime!";
+            text = text.replace('{weekly}', weekly);
+            
+            addMessage(text, 'bot');
+            
+            // Update progress
+            const progress = Math.round(((currentStep + 1) / steps.length) * 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Step ${currentStep + 1} of ${steps.length}`;
+            
+            // Show input or options
+            if (step.options) {
+                showOptions(step.options, step.next);
+            } else if (step.input) {
+                showInput(step.next, step.placeholder);
+            } else {
+                // Auto advance after delay with typing indicator
+                showTyping(() => {
+                    currentStep = step.next();
+                    if (currentStep >= 0 && currentStep < steps.length) {
+                        showStep();
+                    }
+                }, 1500);
+            }
+        }
+        
+        function showOptions(options, callback) {
+            document.getElementById('inputArea').style.display = 'none';
+            const quick = document.getElementById('quick');
+            quick.style.display = 'flex';
+            quick.innerHTML = options.map(opt => 
+                `<button class="option-btn" onclick="handleOption('${opt.replace(/'/g, "\\'")}', ${callback})">${opt}</button>`
+            ).join('');
+        }
+        
+        function showInput(callback, placeholder = 'Type your answer...') {
+            document.getElementById('quick').style.display = 'none';
+            const inputArea = document.getElementById('inputArea');
+            inputArea.style.display = 'flex';
+            const input = document.getElementById('input');
+            input.placeholder = placeholder;
+            input.value = '';
+            input.focus();
+        }
+        
+        function handleOption(choice, callback) {
+            addMessage(choice, 'user');
+            currentStep = callback(choice);
+            setTimeout(showStep, 500);
+        }
+        
+        function send() {
+            const input = document.getElementById('input');
+            const answer = input.value.trim();
+            if (!answer) return;
+            
+            addMessage(answer, 'user');
+            input.value = '';
+            
+            const step = steps[currentStep];
+            currentStep = step.next(answer);
+            
+            setTimeout(showStep, 500);
+        }
+        
+        function addMessage(text, who) {
+            const div = document.createElement('div');
+            div.className = `message ${who}`;
+            div.textContent = text;
+            document.getElementById('chat').appendChild(div);
+            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+        }
+        
+        function showTyping(callback, delay = 1000) {
+            const chat = document.getElementById('chat');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot typing';
+            typingDiv.id = 'typing';
+            typingDiv.innerHTML = '<span></span><span></span><span></span';
+            chat.appendChild(typingDiv);
+            chat.scrollTop = chat.scrollHeight;
+            
+            setTimeout(() => {
+                const t = document.getElementById('typing');
+                if (t) t.remove();
+                callback();
+            }, delay);
+        }
+        
+        function showQuickActions() {
+            document.getElementById('progress').style.display = 'none';
+            const quick = document.getElementById('quick');
+            quick.style.display = 'flex';
+            
+            // Show welcome back or normal quick actions
+            quick.innerHTML = `
+                <button class="quick-btn" onclick="quickAction('✍️ Write something')">✍️ Write</button>
+                <button class="quick-btn" onclick="quickAction('🔔 Set reminder')">🔔 Remind</button>
+                <button class="quick-btn" onclick="quickAction('🧠 What do you know about me?')">🧠 Memory</button>
+                <button class="quick-btn" onclick="quickAction('💡 Quick question')">💡 Help</button>
+            `;
+            
+            // Add input area for chat
+            document.getElementById('inputArea').style.display = 'flex';
+            document.getElementById('input').focus();
+        }
+        
+        function quickAction(msg) {
+            addMessage(msg, 'user');
+            
+            // Check what they're asking for
+            if (msg.includes('Memory')) {
+                showMemory();
+            } else if (msg.includes('Write')) {
+                addMessage("✍️ Got it! Tell me what you want to write - an email, message, or something else? I'll help you put it together!", 'bot');
+            } else if (msg.includes('Remind')) {
+                addMessage("🔔 Sure! What should I remind you about and when? Like 'Remind me to call mom tomorrow at 2pm'", 'bot');
+            } else {
+                addMessage("💡 I'm here to help! Ask me anything - I've got your back! 🤔", 'bot');
+            }
+        }
+        
+        function showMemory() {
+            const { name, job, location, importantPeople, keywords } = state.user;
+            const peopleList = importantPeople.length > 0 
+                ? importantPeople.map(p => `• ${p}`).join('\n')
+                : 'None added yet';
+            const keywordsList = keywords.length > 0 
+                ? keywords.join(', ')
+                : 'None set';
+            
+            const memoryText = `🧠 HERE'S WHAT I REMEMBER ABOUT YOU:\n\n👤 Name: ${name}\n💼 Work: ${job}\n📍 Location: ${location}\n\n👥 YOUR PEOPLE:\n${peopleList}\n\n📌 YOUR KEYWORDS:\n${keywordsList}\n\n🔐 Remember me: ${state.user.rememberMe ? '✅ ON' : '❌ OFF'}`;
+            
+            addMessage(memoryText, 'bot');
+        }
+        
+        // Initialize
+        function init() {
+            loadMemory();
+            
+            if (checkReturningUser()) {
+                // Skip onboarding, show welcome back
+                document.getElementById('progress').style.display = 'none';
+                showWelcomeBack();
+            } else {
+                // Start onboarding
+                showStep();
+            }
+        }
+        
+        // Start when ready
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

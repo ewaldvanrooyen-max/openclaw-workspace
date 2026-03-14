@@ -1,0 +1,271 @@
+# PocketPal - Project Specification
+## Your AI Mate That Actually Gives a Damn
+
+**Version:** 1.0
+**Date:** March 11, 2026
+**Built by:** WolfPack Empire 🐺
+
+---
+
+## Core Identity
+
+| Attribute | Value |
+|-----------|-------|
+| **Name** | PocketPal |
+| **Tagline** | Your AI mate that actually gives a damn! |
+| **Vibe** | Witty, encouraging, helpful mate |
+| **Tone** | Casual, friendly, uses emojis naturally |
+| **Languages** | English, Afrikaans, Zulu, Xhosa, Sotho |
+| **Platform** | Mobile-first (Android/Termux), Desktop later |
+| **Privacy** | 100% local, offline, your data stays yours |
+
+---
+
+## The 10 Nanobots (Team)
+
+| # | Nanobot | Role |
+|---|---------|------|
+| 1 | **Router** | Intent classification, routes to specialist |
+| 2 | **Scribe** | Summarizes messages, threads |
+| 3 | **Ghostwriter** | Tonal mimicry - writes like YOU |
+| 4 | **Guardian** | Financial monitoring, intervention |
+| 5 | **Secretary** | Calendar, tasks, reminders |
+| 6 | **Filter** | Spam, priority detection |
+| 7 | **Teacher** | Explains concepts |
+| 8 | **Translator** | Language conversion |
+| 9 | **Coder** | Programming help |
+| 10 | **Memory Keeper** | Shadow memory, context |
+
+---
+
+## Phase 1: Foundation (This Week)
+
+### 1.1 Onboarding Flow
+- [x] Language selection (5 SA languages)
+- [x] Personal info (name, job, location)
+- [x] Important people (family, friends)
+- [x] Keywords for reminders
+- [x] Memory check & explain limits
+
+### 1.2 Basic Chat UI
+- [x] Web version (instant, no install)
+- [ ] CLI version for Termux
+- [ ] Mobile app shell
+
+### 1.3 Basic Responses
+- [ ] Keyword-based responses
+- [ ] Simple conversation flow
+
+---
+
+## Phase 2: Shadow Memory (Core)
+
+### 2.1 Memory Architecture
+| Component | Technology | Size |
+|-----------|-----------|------|
+| Storage | SQLite + sqlite-vec | Built-in |
+| Embeddings | all-MiniLM-L6-v2 | ~40MB |
+| Search | Hybrid (semantic + keyword) | - |
+
+### 2.2 Memory Types
+- **Conversation** - Recent chats
+- **Fact** - Preferences, important info
+- **People** - Family, friends, colleagues
+- **Event** - Calendar items, deadlines
+
+### 2.3 "Remember When" Feature
+- Temporal queries via timestamps
+- Parse natural language time references
+- Combine with semantic search
+
+### 2.4 Weekly Check-ins
+- Cron job: Check in with important people
+- "How's your brother Sam doing?"
+- Remember events and follow up
+
+---
+
+## Phase 3: Social Ghostwriter
+
+### 3.1 Tonal Mimicry
+- Analyze sent messages locally
+- Learn slang, emoji usage, response patterns
+- Draft in YOUR voice
+
+### 3.2 Message Analysis
+- Detect writing style
+- Identify patterns (punctuation, length, tone)
+- Store as user profile
+
+### 3.3 Draft Generation
+- Generate responses in user's style
+- User can edit or send as-is
+
+---
+
+## Phase 4: Financial Guardian
+
+### 4.1 Banking Integration
+- Monitor local notifications/SMS
+- Track spending vs budget
+- Detect due dates
+
+### 4.2 Intervention
+- Proactive alerts: "Hey, rent is due tomorrow"
+- Spending warnings
+- Financial health tips
+
+### 4.3 Privacy
+- All processing local
+- No bank credentials stored
+- Notifications read only
+
+---
+
+## Phase 5: Adaptive UX
+
+### 5.1 Time-Based Modes
+| Mode | Time | Display |
+|------|------|---------|
+| **Morning Briefing** | 6-9 AM | Goals, weather, messages |
+| **Work Focus** | 9-5 PM | Minimal, urgent only |
+| **Evening Wind Down** | 5-10 PM | Soft UI, tomorrow's plan |
+| **Night Mode** | 10PM-6AM | Do Not Disturb |
+
+### 5.2 Shape-Shifting Interface
+- UI adapts to time of day
+- Context-aware bubbles
+- Priority notifications only
+
+---
+
+## Phase 6: Vision (Future)
+
+### 6.1 On-Device Camera
+- Process images locally (no cloud)
+- Delete after processing
+
+### 6.2 Use Cases
+- Menu scanning (dietary needs)
+- Document scanning
+- Object recognition
+
+---
+
+## Technical Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│              PocketPal Core                  │
+├─────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────────────┐ │
+│  │   Router    │  │  Memory Keeper     │ │
+│  │  (Intent)  │  │  (Vector DB)       │ │
+│  └─────────────┘  └─────────────────────┘ │
+│                                             │
+│  ┌─────────────────────────────────────┐  │
+│  │        Nanobot Team                 │  │
+│  │  Scribe | Ghostwriter | Guardian  │  │
+│  │  Secretary | Filter | Teacher      │  │
+│  │  Translator | Coder | Memory      │  │
+│  └─────────────────────────────────────┘  │
+│                                             │
+│  ┌─────────────────────────────────────┐  │
+│  │     Local Storage (SQLite)          │  │
+│  │  Conversations | Facts | People    │  │
+│  └─────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+## Internal Dialogue Log
+
+Users can see nanobots collaborating:
+
+```
+🔍 The Scribe: "Summarized 42 messages from Family Group"
+🔔 The Filter: "Flagged Mom as urgent - keyword 'help'"
+📅 The Secretary: "Drafted calendar invite for Sunday"
+🛡️ The Guardian: "Rent due tomorrow - notified user"
+```
+
+---
+
+## Memory System Specs
+
+| Metric | Value |
+|--------|-------|
+| Storage needed | ~50MB total |
+| Embedding model | 40MB |
+| SQLite database | ~5MB base |
+| Conversations stored | ~100 before summarization |
+| Compression | 50-75% via quantization |
+
+---
+
+## Roadmap
+
+| Phase | Focus | Timeline |
+|-------|-------|----------|
+| 1 | Foundation | This week |
+| 2 | Shadow Memory | Week 2 |
+| 3 | Ghostwriter | Week 3 |
+| 4 | Financial Guardian | Week 4 |
+| 5 | Adaptive UX | Week 5 |
+| 6 | Vision | Future |
+
+---
+
+## Research Links
+
+- Memory: `memory/pocketpal-memory-research.md`
+- Methodology: `memory/methodology.md`
+
+---
+
+*WolfPack Empire 🐺 - Building the future of personal AI*
+
+---
+
+## Phase 7: Privacy-First Bridge
+
+### 7.1 The Scout Nanobot
+- Only ONE nanobot has internet access
+- "Double-blind" search - generic query, personal results
+- Uses privacy-focused search (DuckDuckGo or SearXNG)
+- Never shares your location/identity
+
+### 7.2 Privacy Firewall
+- PII (Personally Identifiable Information) scrubber
+- Replaces names, addresses, phone numbers with placeholders
+- Swaps back after answer returns
+
+### 7.3 Offline Vault (RAG)
+- Upload your PDFs (lease, car manual, health records)
+- 100% offline search via natural language
+- "What's my tire pressure?" "Can I have pets under my lease?"
+
+### 7.4 Ghost Notifications
+- Intercept all pings
+- Hourly "Human Pulse" summary
+- "3 friends planning Friday, boss update (not urgent), mom called twice"
+
+### 7.5 Social Mediator
+- Group chat analysis
+- Conflict resolution suggestions
+- Knows YOUR preferences
+
+### 7.6 Mood Ring
+- Smartwatch integration (local Bluetooth)
+- Heart rate / stress monitoring
+- Suggests breaks when tense
+
+---
+
+## Privacy Architecture
+
+User Device:
+- Privacy Firewall: PII scrubber, data anonymizer
+- Scout: Internet gatekeeper, generic queries only
+- Offline Vault: Your docs, 100% local search
