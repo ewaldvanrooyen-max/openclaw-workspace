@@ -4,14 +4,15 @@
 ## Image Generation
 - [x] Leonardo.ai integration (free tier - 150 tokens/day)
 - [x] Test image generation
-- [ ] Create image-generation skill
+- [x] Create image-generation skill (sketches/leonardo-image)
+- [ ] Create generation scripts
 - [ ] Seed library with test images
 - [ ] Create generation cron (hourly)
 
 ## Video Generation
 - [ ] Kaiber.ai signup (free tier)
-- [ ] Test video generation
-- [ ] Create video-generation skill
+- [x] Create video-generation skill (sketches/kaiber-video)
+- [x] Create generation scripts
 - [ ] Seed library with test videos
 - [ ] Create generation cron
 
