@@ -57,7 +57,13 @@
 
 ---
 
-### 4. GHL Integration
+### 4. Social Media Agent
+**Description:** Autonomous social media management across all platforms
+**Repo:** github.com/ewaldvanrooyen-max/socials-agent (create)
+**Status:** Blueprint ready
+**Tasks:** (See blueprint)
+
+### 5. GHL Integration
 **Description:** GoHighLevel marketing/CRM automation
 **Status:** Research complete, implementation pending
 
@@ -125,10 +131,15 @@ Categorized for vector search:
 - [ ] Get ContentEngen live (domain + deployment)
 
 ### 🚫 Blocked by E-man
+- [ ] **Social Media Agent Phase 1:** Approve platform API credentials (Meta, Twitter)
+- [ ] **Social Media Agent Phase 2:** Review multi-platform implementation
 - [ ] **ContentEngen Phase 1:** Approve GCP credentials / R2 storage access
 - [ ] **ContentEngen Phase 2:** Review and approve library assets (1,200 images, 250 clips)
 - [ ] **ContentEngen Phase 3:** Test and approve workflow outputs
 - [ ] **ContentEngen Phase 4:** Sign off on production go-live
+- [ ] **IC Phase 2:** Approve POPIA verification flow
+- [ ] **IC Phase 3:** Review website lead capture forms
+- [ ] **IC Phase 4:** Sign off on marketing launch
 
 ### Medium Priority
 - [ ] Set up GHL account

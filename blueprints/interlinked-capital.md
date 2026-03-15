@@ -11,10 +11,10 @@ South African fleet and asset finance company connecting businesses with funding
 ## Core Metrics
 | Metric | Target | Current |
 |--------|--------|---------|
-| Total Leads | - | TBD |
-| Approval Rate | >60% | TBD |
-| Follow-up Response | >40% | TBD |
-| Pipeline Value | - | TBD |
+| Total Leads | - | 0 |
+| Approval Rate | >60% | - |
+| Follow-up Response | >40% | - |
+| Pipeline Value | - | 0 |
 
 ---
 
@@ -26,7 +26,7 @@ South African fleet and asset finance company connecting businesses with funding
 
 ## Sub-Projects
 
-### 1. website
+### 1. website ✅
 **Purpose:** Business website
 **Status:** Live
 **Location:** /var/www/ic-website/
@@ -34,7 +34,7 @@ South African fleet and asset finance company connecting businesses with funding
 - [ ] Add contact forms
 - [ ] Add lead capture
 
-### 2. workflows
+### 2. workflows ✅
 **Purpose:** WhatsApp CRM, lead management automation
 **Status:** Built
 **Location:** /root/.openclaw/workspace/ic/
@@ -43,27 +43,27 @@ South African fleet and asset finance company connecting businesses with funding
 - [ ] Status query automation
 - [ ] Short codes implementation
 
-### 3. crm
+### 3. crm ✅
 **Purpose:** SQLite database for leads
 **Status:** Built
-**Location:** leads.db
+**Location:** /root/.openclaw/workspace/ic/leads.db
 **Tasks:**
 - [ ] Connect to workflow
 - [ ] Add reporting
 
-### 4. automation
+### 4. automation ✅
 **Purpose:** 48-hour follow-up, auto-responses
-**Status:** Partial
+**Status:** Fixed
 **Location:** Cron jobs
 **Tasks:**
-- [ ] Fix IC-FOLLOWUP cron
+- [x] Fix IC-FOLLOWUP cron (now IC-48hr-FollowUp)
 - [ ] Add more automation
 
 ---
 
 ## Tech Stack
 - **Frontend:** Static HTML
-- **Backend:** Python (webhook)
+- **Backend:** Python webhook
 - **Database:** SQLite
 - **Channels:** WhatsApp (Twilio), Telegram
 
@@ -72,22 +72,38 @@ South African fleet and asset finance company connecting businesses with funding
 ## Integrations
 | Service | Purpose | Status |
 |---------|---------|--------|
-| WhatsApp Business | Client communication | Connected |
-| Twilio | WhatsApp API | Connected |
-| Telegram | Admin alerts | Connected |
+| WhatsApp Business | Client communication | ✅ Connected |
+| Twilio | WhatsApp API | ✅ Connected |
+| Telegram | Admin alerts | ✅ Connected |
 
 ---
 
 ## Current Blockers
-- IC-FOLLOWUP cron job failing
-- No live CRM dashboard (building in Mission Control)
+- None - core systems working
 
 ---
 
-## Next 7 Days
-1. Fix IC-FOLLOWUP cron
-2. Connect CRM to workflow
-3. Set up Google Workspace (email/calendar)
+## 4-Phase Plan
+
+### Phase 1: Automation (This Week)
+- [x] Fix IC-48hr-FollowUp cron job
+- [ ] Test follow-up reporting
+- [ ] Add short codes (D1, I1, P1, A1, etc.)
+
+### Phase 2: Verification (This Week)
+- [ ] Implement POPIA verification flow
+- [ ] Add status query automation
+- [ ] Connect CRM to workflow
+
+### Phase 3: Website (This Week)
+- [ ] Add contact forms to website
+- [ ] Add lead capture integration
+- [ ] Connect to CRM
+
+### Phase 4: Growth (This Week)
+- [ ] Add reporting dashboard
+- [ ] Set up Google Workspace
+- [ ] Launch marketing campaigns
 
 ---
 
