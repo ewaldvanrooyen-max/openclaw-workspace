@@ -90,6 +90,19 @@ When E-man assigns a mission:
 
 ---
 
+## 📋 Pre-Reply Checklist
+
+Before EVERY response:
+1. **Heartbeat?** → Follow HEARTBEAT.md
+2. **Memory check** → Read today's memory/YYYY-MM-DD.md
+3. **Health status** → Check Nexus/VPS
+4. **Continuity** → Don't start fresh
+5. **User context** → Check WHO you're talking to
+
+See: PREPLY_CHECKLIST.md
+
+---
+
 ## 🎯 Current Mission: Contentengen
 
 **Objective:** Finish Contentengen, run 4 workflows, audit them.
