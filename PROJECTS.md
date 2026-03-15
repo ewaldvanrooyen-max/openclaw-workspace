@@ -124,6 +124,12 @@ Categorized for vector search:
 - [ ] Delete old PocketMind repos (manual - need delete_repo scope)
 - [ ] Get ContentEngen live (domain + deployment)
 
+### 🚫 Blocked by E-man
+- [ ] **ContentEngen Phase 1:** Approve GCP credentials / R2 storage access
+- [ ] **ContentEngen Phase 2:** Review and approve library assets (1,200 images, 250 clips)
+- [ ] **ContentEngen Phase 3:** Test and approve workflow outputs
+- [ ] **ContentEngen Phase 4:** Sign off on production go-live
+
 ### Medium Priority
 - [ ] Set up GHL account
 - [ ] Enable AWS module (if needed)
