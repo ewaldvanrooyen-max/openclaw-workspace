@@ -1,0 +1,9 @@
+{
+  "lastChecks": {
+    "nexus": 1773578065,
+    "gateway": 1773578065,
+    "session": 1773578065
+  },
+  "nexusStatus": "disconnected",
+  "notes": "Nexus node paired but not connected. Gateway running normally."
+}
