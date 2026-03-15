@@ -23,16 +23,33 @@
 ### PocketPal (Priority: HIGH - All phases available)
 1. **PP-01:** Consolidate PocketPal repos
 2. **PP-02:** Test on local machine
-3. **PP-03:** Phone edition deployment
+3. **PP-03:** Phone edition deployment (web UI)
 4. **PP-04:** AgentMesh integration
 5. **PP-05:** Nanobot/Picoclaw optimization
+6. **PP-06:** Connect AI model to web UI
+7. **PP-07:** Add voice input capability
+8. **PP-08:** Add memory/context persistence
+9. **PP-09:** Build Nanobot loader system
+10. **PP-10:** Test full AI chat flow
 
 ### Interlinked Capital (Priority: MEDIUM)
 1. **IC-01:** Set up Google Workspace (Gmail + Calendar) in OpenClaw
+2. **IC-02:** Fix IC-FOLLOWUP cron job
+3. **IC-03:** Add short codes (D1, I1, P1, etc.)
+4. **IC-04:** POPIA verification flow
+5. **IC-05:** Status query automation
+6. **IC-06:** Connect CRM to workflow
+7. **IC-07:** Add contact forms to website
+8. **IC-08:** Set up reporting dashboard
 
 ### Social Media Agent (Priority: MEDIUM)
 1. **SMA-01:** Content scheduling system
 2. **SMA-02:** Analytics & reporting
+3. **SMA-03:** Platform API credentials (Meta, Twitter)
+4. **SMA-04:** Multi-platform implementation
+5. **SMA-05:** Build posting automation
+6. **SMA-06:** Build ad campaign creator
+7. **SMA-07:** Test social media flows
 
 ---
 
@@ -43,6 +60,10 @@
 - CE-02: Library assets approval (1,200 images, 250 clips)
 - CE-03: Test and approve workflow outputs
 - CE-04: Production go-live sign-off
+- CE-05: Deploy FFmpeg worker to Cloud Run
+- CE-06: Connect R2 storage
+- CE-07: Run library seeding
+- CE-08: Test all 5 workflows
 
 ### Interlinked Capital
 - IC-02: POPIA verification flow approval
@@ -57,7 +78,14 @@
 - GHL-01 through GHL-05: All blocked (needs GHL account creation)
 
 ### Autonomous Income
-- AI-01 through AI-04: All blocked (depends on other projects)
+- AI-01: Build Web-Asset Auditor crawler
+- AI-02: Create report template
+- AI-03: Test on local businesses
+- AI-04: Launch first paid pilot
+- AI-05: Connect GHL for report delivery
+- AI-06: Set up affiliate marketing
+- AI-07: Create digital products
+- AI-08: Set up delivery system
 
 ---
 
