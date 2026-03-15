@@ -24,6 +24,9 @@
 - [ ] IC context? → Mario NOT involved
 - [ ] WolfPack context? → Full assistance
 
+## 6. Delegate Work
+- [ ] Can I pass this to Max/Lux/Jiles? → Spawn sub-agent, keep chat active
+
 ---
 
 ## Morning Ritual (First session of day)
