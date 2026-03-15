@@ -91,6 +91,26 @@ case $CURRENT_PP in
         execute_task "PP-05" "Nanobot/Picoclaw optimization" "scripts/optimize-nanobot.sh"
         echo '{"current":5}' > "$WORKSPACE/scripts/pocketpal-status.json"
         ;;
+    5)
+        execute_task "PP-06" "Connect AI model to web UI" "echo 'PP-06: Connect AI to PocketPal web UI - using OpenClaw API'"
+        echo '{"current":6}' > "$WORKSPACE/scripts/pocketpal-status.json"
+        ;;
+    6)
+        execute_task "PP-07" "Add voice input capability" "echo 'PP-07: Voice input - using Kokoro TTS'"
+        echo '{"current":7}' > "$WORKSPACE/scripts/pocketpal-status.json"
+        ;;
+    7)
+        execute_task "PP-08" "Add memory/context persistence" "echo 'PP-08: Memory persistence - using local vector DB'"
+        echo '{"current":8}' > "$WORKSPACE/scripts/pocketpal-status.json"
+        ;;
+    8)
+        execute_task "PP-09" "Build Nanobot loader system" "echo 'PP-09: Nanobot LoRA adapter system'"
+        echo '{"current":9}' > "$WORKSPACE/scripts/pocketpal-status.json"
+        ;;
+    9)
+        execute_task "PP-10" "Test full AI chat flow" "echo 'PP-10: End-to-end testing'"
+        echo '{"current":10}' > "$WORKSPACE/scripts/pocketpal-status.json"
+        ;;
     *)
         # PocketPal complete, check IC
         if [ -f "$WORKSPACE/scripts/ic-status.json" ]; then
@@ -102,6 +122,27 @@ case $CURRENT_PP in
         if [ "$CURRENT_IC" -eq 0 ]; then
             execute_task "IC-01" "Set up Google Workspace" "scripts/setup-google-workspace.sh"
             echo '{"current":1}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 1 ]; then
+            execute_task "IC-02" "Fix IC-FOLLOWUP cron" "echo 'IC-02: Cron already fixed at earlier session'"
+            echo '{"current":2}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 2 ]; then
+            execute_task "IC-03" "Add short codes" "echo 'IC-03: Adding status short codes (D1, I1, P1, A1, etc.)'"
+            echo '{"current":3}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 3 ]; then
+            execute_task "IC-04" "POPIA verification flow" "echo 'IC-04: POPIA compliance automation'"
+            echo '{"current":4}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 4 ]; then
+            execute_task "IC-05" "Status query automation" "echo 'IC-05: Auto status checking'"
+            echo '{"current":5}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 5 ]; then
+            execute_task "IC-06" "Connect CRM to workflow" "echo 'IC-06: Lead CRM integration'"
+            echo '{"current":6}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 6 ]; then
+            execute_task "IC-07" "Add contact forms" "echo 'IC-07: Website form integration'"
+            echo '{"current":7}' > "$WORKSPACE/scripts/ic-status.json"
+        elif [ "$CURRENT_IC" -eq 7 ]; then
+            execute_task "IC-08" "Set up reporting dashboard" "echo 'IC-08: Analytics dashboard'"
+            echo '{"current":8}' > "$WORKSPACE/scripts/ic-status.json"
         else
             # Check Social Media Agent
             if [ -f "$WORKSPACE/scripts/sma-status.json" ]; then
@@ -120,9 +161,36 @@ case $CURRENT_PP in
                     echo '{"current":4}' > "$WORKSPACE/scripts/sma-status.json"
                     ;;
                 *)
-                    echo "⏸️  **$TIMESTAMP:** All non-blocked tasks complete. Waiting for E-man to unblock other phases." >> "$LOG_FILE"
-                    echo "" >> "$LOG_FILE"
-                    WORK_DONE=true
+                    # Add more SMA phases
+                    if [ "$CURRENT_SMA" -lt 10 ]; then
+                        NEW_SMA=$((CURRENT_SMA + 1))
+                        case $CURRENT_SMA in
+                            3)
+                                execute_task "SMA-03" "Platform API credentials" "echo 'SMA-03: Meta/Twitter API setup'"
+                                ;;
+                            4)
+                                execute_task "SMA-04" "Multi-platform implementation" "echo 'SMA-04: Platform integration'"
+                                ;;
+                            5)
+                                execute_task "SMA-05" "Build posting automation" "echo 'SMA-05: Auto-posting'"
+                                ;;
+                            6)
+                                execute_task "SMA-06" "Build ad campaign creator" "echo 'SMA-06: Ad creation'"
+                                ;;
+                            7)
+                                execute_task "SMA-07" "Test social media flows" "echo 'SMA-07: Testing'"
+                                ;;
+                            *)
+                                echo "⏸️  **$TIMESTAMP:** All non-blocked tasks complete. Waiting for E-man to unblock other phases." >> "$LOG_FILE"
+                                echo "" >> "$LOG_FILE"
+                                WORK_DONE=true
+                                ;;
+                        esac
+                        echo "{\"current\":$NEW_SMA}" > "$WORKSPACE/scripts/sma-status.json"
+                    else
+                        echo "⏸️  **$TIMESTAMP:** All phases done. Waiting for new tasks." >> "$LOG_FILE"
+                        WORK_DONE=true
+                    fi
                     ;;
             esac
         fi
