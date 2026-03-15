@@ -50,6 +50,7 @@
 - [ ] POPIA verification flow
 - [ ] Status query automation
 - [ ] Short codes implementation
+- [ ] Set up Google Workspace (Gmail + Calendar)
 
 ---
 
@@ -105,3 +106,21 @@ Categorized for vector search:
 
 ### 🔗 Tools
 - (Add bookmarks as requested)
+
+---
+
+## 🔧 Open Tasks
+
+### High Priority
+- [ ] Set up Google Workspace (Gmail + Calendar) in OpenClaw
+- [ ] Delete old PocketMind repos (manual - need delete_repo scope)
+- [ ] Get ContentEngen live (domain + deployment)
+
+### Medium Priority
+- [ ] Set up GHL account
+- [ ] Enable AWS module (if needed)
+- [ ] Enable Scout module (run initial scan)
+
+### Low Priority
+- [ ] Add more bookmarks
+- [ ] Populate Workshop with tasks

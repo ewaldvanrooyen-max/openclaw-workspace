@@ -13,14 +13,8 @@
 - mlc-nginx (8888)
 
 ## Nexus (Local Machine)
-- **Name:** aris-steyn-imedia-S2870
-- **Connection:** Via OpenClaw node (paired & connected)
-- **SSH:** aris-steyn@192.168.5.116 (local IP)
-- **Health Check:** Run `openclaw nodes status` to verify connection
-- **Git Sync:** 
-  - Workspace: `/home/aris-steyn/openclaw-workspace/`
-  - To sync: `cd /home/aris-steyn && git clone https://github.com/ewaldvanrooyen-max/openclaw-workspace.git`
-  - Then `git pull` to get updates
+- **Status:** Not currently paired
+- **Note:** Running VPS-only for now
 
 ## Credentials Location
 - Local vault: ~/.openclaw/credentials/

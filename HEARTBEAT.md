@@ -4,16 +4,18 @@
 - [ ] Check session context usage via session_status
 - [ ] If context > 80%: Alert E-man, finish current task, recommend new session
 
-## Health Loop (Every 30 minutes)
-### Aris checking on Nexus (VPS → Local)
-- [ ] Check if Nexus is reachable via node status
-- [ ] If Nexus down: Alert E-man
+## System Health (Every 30 minutes)
+- [ ] Check gateway status (openclaw status)
+- [ ] Check Mission Control running (port 8082)
+- [ ] Check Chrome automation running (port 9222)
+- [ ] Report status if anything down
 
-### What Nexus should check on Aris:
-- [ ] Check VPS gateway status
-- [ ] If Aris down: Nexus has write access as 2IC to handle urgent tasks
-- [ ] Alert E-man if critical
+## Current Architecture (VPS-Only)
+- No Nexus - VPS handles everything
+- Chrome automation on VPS for business operations
+- Mission Control dashboard for monitoring
 
 ## Notes
-- 2IC Protocol: If Aris is down, Nexus can write to memory/docs temporarily
-- Failover: Jobs continue on whichever instance is up
+- Gateway: 76.13.195.238:18789
+- Mission Control: 76.13.195.238:8082
+- Chrome DevTools: localhost:9222
