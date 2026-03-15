@@ -13,11 +13,15 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from flask import Flask, render_template_string, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from agent.brain import MockBrain
 from storage.json_store import ProfileStore, HistoryStore
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
+
+# Create templates folder
+TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
+os.makedirs(TEMPLATE_DIR, exist_ok=True)
 
 # Initialize stores
 DATA_DIR = os.path.expanduser("~/.pocketmind")
@@ -28,14 +32,13 @@ history_store = HistoryStore(DATA_DIR)
 brain = MockBrain()
 
 
-# HTML Templates
-BASE_TEMPLATE = """
-<!DOCTYPE html>
+# Create base template
+BASE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PocketPal</title>
+    <title>{% block title %}PocketPal{% endblock %}</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -143,6 +146,7 @@ BASE_TEMPLATE = """
         .chat-messages {
             max-height: calc(100vh - 200px);
             overflow-y: auto;
+            padding-bottom: 20px;
         }
         .chat-input {
             position: fixed;
@@ -211,12 +215,19 @@ BASE_TEMPLATE = """
             Chat
         </a>
     </nav>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
 """
 
-HOME_PAGE = """
-{% extends base %}
+# Write base template
+with open(os.path.join(TEMPLATE_DIR, 'base.html'), 'w') as f:
+    f.write(BASE_TEMPLATE)
+
+
+# Write home template
+HOME_TEMPLATE = """{% extends "base.html" %}
+{% block title %}PocketPal - Home{% endblock %}
 {% block content %}
     {% if has_profile %}
         <div class="card">
@@ -256,13 +267,18 @@ HOME_PAGE = """
 {% endblock %}
 """
 
-ONBOARDING_PAGE = """
-{% extends base %}
+with open(os.path.join(TEMPLATE_DIR, 'home.html'), 'w') as f:
+    f.write(HOME_TEMPLATE)
+
+
+# Write onboarding template
+ONBOARDING_TEMPLATE = """{% extends "base.html" %}
+{% block title %}PocketPal - Profile{% endblock %}
 {% block content %}
     <div class="card">
         <h2>👤 Your Profile</h2>
         {% if has_profile %}
-            <p style="color: #8b949e; margin-bottom: 16px;">Manage your profile settings</p>
+            <p style="color: #8b949e; margin-bottom: 16px;">Your current profile settings</p>
             
             <div class="profile-field">
                 <span class="profile-label">Name</span>
@@ -292,8 +308,8 @@ ONBOARDING_PAGE = """
     </div>
     
     <div class="card">
-        <h3>Simple Onboarding</h3>
-        <p style="color: #8b949e; margin-bottom: 16px;">Answer a few quick questions</p>
+        <h3>✏️ Edit Profile</h3>
+        <p style="color: #8b949e; margin-bottom: 16px;">Update your settings</p>
         
         <form method="post" action="/onboarding/update">
             <label>What should I call you?</label>
@@ -329,8 +345,13 @@ ONBOARDING_PAGE = """
 {% endblock %}
 """
 
-CHAT_PAGE = """
-{% extends base %}
+with open(os.path.join(TEMPLATE_DIR, 'onboarding.html'), 'w') as f:
+    f.write(ONBOARDING_TEMPLATE)
+
+
+# Write chat template
+CHAT_TEMPLATE = """{% extends "base.html" %}
+{% block title %}PocketPal - Chat{% endblock %}
 {% block content %}
     <div class="chat-messages" id="messages">
         {% if not has_profile %}
@@ -352,6 +373,7 @@ CHAT_PAGE = """
     </div>
 {% endblock %}
 
+{% block scripts %}
 <div class="chat-input">
     <input type="text" id="user-input" placeholder="Type a message..." {% if not has_profile %}disabled{% endif %}>
     <button onclick="sendMessage()" {% if not has_profile %}disabled{% endif %}>Send</button>
@@ -371,6 +393,11 @@ CHAT_PAGE = """
         
         // Add user message
         const messagesDiv = document.getElementById('messages');
+        
+        // Remove empty state if present
+        const emptyState = messagesDiv.querySelector('.empty-state');
+        if (emptyState) emptyState.remove();
+        
         const userMsg = document.createElement('div');
         userMsg.className = 'message user';
         userMsg.textContent = message;
@@ -399,17 +426,21 @@ CHAT_PAGE = """
         if (e.key === 'Enter') sendMessage();
     });
 </script>
+{% endblock %}
 """
 
+with open(os.path.join(TEMPLATE_DIR, 'chat.html'), 'w') as f:
+    f.write(CHAT_TEMPLATE)
 
+
+# Routes
 @app.route('/')
 def home():
     """Home page showing profile status."""
     profile = profile_store.load_profile()
     has_profile = profile is not None and bool(profile.get('name'))
     
-    return render_template_string(
-        BASE_TEMPLATE + HOME_PAGE,
+    return render_template('home.html',
         page='home',
         profile=profile or {},
         has_profile=has_profile
@@ -422,8 +453,7 @@ def onboarding():
     profile = profile_store.load_profile()
     has_profile = profile is not None and bool(profile.get('name'))
     
-    return render_template_string(
-        BASE_TEMPLATE + ONBOARDING_PAGE,
+    return render_template('onboarding.html',
         page='onboarding',
         profile=profile or {},
         has_profile=has_profile
@@ -488,8 +518,7 @@ def chat():
     # Get recent messages
     messages = history_store.get_recent(20) if has_profile else []
     
-    return render_template_string(
-        BASE_TEMPLATE + CHAT_PAGE,
+    return render_template('chat.html',
         page='chat',
         profile=profile or {},
         has_profile=has_profile,
@@ -536,6 +565,6 @@ if __name__ == '__main__':
     print("=" * 50)
     print("🤖 PocketPal Web Interface")
     print("=" * 50)
-    print("Open http://localhost:5005 on your phone!")
+    print("Open http://76.13.195.238:5005 on your phone!")
     print("=" * 50)
     app.run(host='0.0.0.0', port=5005, debug=True)

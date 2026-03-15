@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}PocketPal - Home{% endblock %}
+{% block content %}
+    {% if has_profile %}
+        <div class="card">
+            <h2>Welcome back, {{ profile.name }}! 👋</h2>
+            <p style="color: #8b949e; margin-top: 8px;">
+                {{ profile.response_style }} • {{ profile.goal_display }}
+            </p>
+        </div>
+        
+        <div class="card">
+            <h3>Quick Stats</h3>
+            <div class="profile-field">
+                <span class="profile-label">Schedule</span>
+                <span class="profile-value">{{ profile.schedule_display }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Timezone</span>
+                <span class="profile-value">{{ profile.timezone }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Tone</span>
+                <span class="profile-value">{{ profile.tone }}</span>
+            </div>
+        </div>
+        
+        <a href="/chat" class="btn">Start Chatting</a>
+    {% else %}
+        <div class="card">
+            <h2>Welcome to PocketPal! 🎉</h2>
+            <p style="color: #8b949e; margin-top: 8px;">
+                Your personal AI assistant. Let's get you set up!
+            </p>
+        </div>
+        
+        <a href="/onboarding" class="btn">Start Onboarding</a>
+    {% endif %}
+{% endblock %}

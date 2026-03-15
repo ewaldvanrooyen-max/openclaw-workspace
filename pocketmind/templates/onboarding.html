@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}PocketPal - Profile{% endblock %}
+{% block content %}
+    <div class="card">
+        <h2>👤 Your Profile</h2>
+        {% if has_profile %}
+            <p style="color: #8b949e; margin-bottom: 16px;">Your current profile settings</p>
+            
+            <div class="profile-field">
+                <span class="profile-label">Name</span>
+                <span class="profile-value">{{ profile.name }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Goal</span>
+                <span class="profile-value">{{ profile.goal_display }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Schedule</span>
+                <span class="profile-value">{{ profile.schedule_display }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Timezone</span>
+                <span class="profile-value">{{ profile.timezone }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Style</span>
+                <span class="profile-value">{{ profile.response_style }}</span>
+            </div>
+            
+            <a href="/onboarding/reset" class="btn btn-secondary" style="margin-top: 16px;">Reset Profile</a>
+        {% else %}
+            <p style="color: #8b949e;">No profile yet. Complete onboarding to get started!</p>
+        {% endif %}
+    </div>
+    
+    <div class="card">
+        <h3>✏️ Edit Profile</h3>
+        <p style="color: #8b949e; margin-bottom: 16px;">Update your settings</p>
+        
+        <form method="post" action="/onboarding/update">
+            <label>What should I call you?</label>
+            <input type="text" name="name" value="{{ profile.name or '' }}" placeholder="Your name" required>
+            
+            <label>What's your main goal?</label>
+            <select name="goal">
+                <option value="productivity" {{ 'selected' if profile.goal == 'productivity' else '' }}>Productivity & Tasks</option>
+                <option value="learning" {{ 'selected' if profile.goal == 'learning' else '' }}>Learning & Study</option>
+                <option value="health" {{ 'selected' if profile.goal == 'health' else '' }}>Health & Fitness</option>
+                <option value="creative" {{ 'selected' if profile.goal == 'creative' else '' }}>Creative Projects</option>
+                <option value="general" {{ 'selected' if profile.goal == 'general' else '' }}>General Assistant</option>
+            </select>
+            
+            <label>What's your typical schedule?</label>
+            <select name="schedule_type">
+                <option value="9-5_office_worker" {{ 'selected' if profile.schedule_type == '9-5_office_worker' else '' }}>9-5 Office Worker</option>
+                <option value="flexible" {{ 'selected' if profile.schedule_type == 'flexible' else '' }}>Flexible Hours</option>
+                <option value="night_owl" {{ 'selected' if profile.schedule_type == 'night_owl' else '' }}>Night Owl</option>
+                <option value="early_bird" {{ 'selected' if profile.schedule_type == 'early_bird' else '' }}>Early Bird</option>
+            </select>
+            
+            <label>How should I respond?</label>
+            <select name="response_style">
+                <option value="Brief & to the point" {{ 'selected' if profile.response_style == 'Brief & to the point' else '' }}>Brief & to the point</option>
+                <option value="Detailed explanations" {{ 'selected' if profile.response_style == 'Detailed explanations' else '' }}>Detailed explanations</option>
+                <option value="Casual conversation" {{ 'selected' if profile.response_style == 'Casual conversation' else '' }}>Casual conversation</option>
+            </select>
+            
+            <button type="submit" class="btn">Save Profile</button>
+        </form>
+    </div>
+{% endblock %}

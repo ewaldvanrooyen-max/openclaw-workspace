@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}PocketPal - Chat{% endblock %}
+{% block content %}
+    <div class="chat-messages" id="messages">
+        {% if not has_profile %}
+            <div class="empty-state">
+                <p>Complete onboarding first to start chatting!</p>
+                <a href="/onboarding" class="btn" style="margin-top: 16px; width: auto;">Go to Profile</a>
+            </div>
+        {% elif messages|length == 0 %}
+            <div class="empty-state">
+                <p>👋 Hey there! How can I help you today?</p>
+            </div>
+        {% else %}
+            {% for msg in messages %}
+                <div class="message {{ msg.role }}">
+                    {{ msg.content }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<div class="chat-input">
+    <input type="text" id="user-input" placeholder="Type a message..." {% if not has_profile %}disabled{% endif %}>
+    <button onclick="sendMessage()" {% if not has_profile %}disabled{% endif %}>Send</button>
+</div>
+
+<script>
+    function scrollToBottom() {
+        const msgs = document.getElementById('messages');
+        msgs.scrollTop = msgs.scrollHeight;
+    }
+    scrollToBottom();
+    
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const message = input.value.trim();
+        if (!message) return;
+        
+        // Add user message
+        const messagesDiv = document.getElementById('messages');
+        
+        // Remove empty state if present
+        const emptyState = messagesDiv.querySelector('.empty-state');
+        if (emptyState) emptyState.remove();
+        
+        const userMsg = document.createElement('div');
+        userMsg.className = 'message user';
+        userMsg.textContent = message;
+        messagesDiv.appendChild(userMsg);
+        input.value = '';
+        scrollToBottom();
+        
+        // Send to server
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({message})
+        });
+        
+        const data = await response.json();
+        
+        // Add assistant response
+        const assistantMsg = document.createElement('div');
+        assistantMsg.className = 'message assistant';
+        assistantMsg.textContent = data.response;
+        messagesDiv.appendChild(assistantMsg);
+        scrollToBottom();
+    }
+    
+    document.getElementById('user-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+</script>
+{% endblock %}
