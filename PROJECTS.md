@@ -11,11 +11,14 @@
 - `infrastructure` - Cloud Run, R2 storage, FFmpeg
 - `scripts` - TTS, Gemini integration
 - `library` - Asset library, backgrounds
+- `free-media` - Free video & image generation (cron jobs)
 
 **Tasks:**
 - [ ] Connect Gemini API for dynamic scripts
 - [ ] Add 4 aesthetic themes
 - [ ] Paddle/Stripe integration
+- [ ] Set up free-media cron jobs (image generation, video generation)
+- [ ] Add free media generation scripts
 
 ---
 
@@ -106,6 +109,11 @@ Categorized for vector search:
 
 ### 🔗 Tools
 - (Add bookmarks as requested)
+
+### 📚 Bookmarks
+- Awesome OpenClaw Skills: https://github.com/VoltAgent/awesome-openclaw-skills
+- BlackView Tablet + Samsung Dex Guide: https://www.google.com/search?q=I+have+an+old+BlackView+tablet+that+I+want+to+use+for+a+mini+PC+with+my+Samsung+dex.+how+do+I+do+this%3F+my+phone+is+an+S21+Ultra
+- Opal Google: https://opal.google/landing/
 
 ---
 
