@@ -49,6 +49,13 @@ Build a subscription-based "unlimited" AI agent wrapper around OpenClaw. Sell to
 - API Access
 - Priority Support
 
+### Competitor-Crushing Features (from research)
+1. **Persistent Project Memory** - Like Claude's CLAUDE.md, auto-loads project context
+2. **Cross-Session Context** - Users don't re-explain every time
+3. **Workflow Recording** - Record & replay browser automation
+4. **Agent Marketplace** - Pre-built templates users can share
+5. **Privacy Signals** - Visible data sovereignty guarantees
+
 ### Differentiators
 - Privacy-first (local option via PocketPal)
 - Open-source core
@@ -76,21 +83,26 @@ MiniMax API + Skills (Leonardo, Kaiber, etc.)
 - [ ] Set up multi-user auth
 - [ ] Connect MiniMax with quota tracking
 - [ ] Basic billing (Lemon Squeezy/Stripe)
+- [ ] **Persistent Project Memory** (auto-load PROJECT.md)
 
 ### Phase 2: Core Features
 - [ ] Image gen (Leonardo)
 - [ ] Video gen (Kaiber)
 - [ ] Browser automation
+- [ ] **Cross-Session Context**
 
 ### Phase 3: Premium
 - [ ] Voice (TTS/STT)
 - [ ] Custom Nanobots
 - [ ] API access
+- [ ] **Workflow Recording**
+- [ ] **Agent Marketplace**
 
 ### Phase 4: Scale
 - [ ] Mobile app
 - [ ] White-label options
 - [ ] Enterprise features
+- [ ] **Privacy Dashboard**
 
 ---
 

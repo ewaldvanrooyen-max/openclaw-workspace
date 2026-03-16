@@ -88,6 +88,16 @@
 **Description:** Subscription-based "unlimited" AI agent (Genspark alternative)
 **Status:** Concept
 
+### 7. Aris Enhancements
+**Description:** Upgrade Aris with competitor-crushing features
+**Status:** Ready to start
+
+**Features:**
+- [ ] Persistent Project Memory (auto-load PROJECT.md)
+- [ ] Cross-Session Context
+- [ ] Workflow Recording
+- [ ] Agent Marketplace
+
 **Sub-divisions:**
 - `affiliate` - ContentEngen + affiliate links
 - `digital-products` - SEO guides, templates
