@@ -110,6 +110,95 @@ Build a fully autonomous, white-labeled "business in a box" using GoHighLevel (G
 
 ---
 
+## Target Market: SA Franchises
+
+**Goal:** 100 clients @ ZAR 2k/month = ZAR 200k MRR
+
+### 3 Priority Niches
+
+#### 1. Beauty, Health & Wellness (Appointment Heavyweight)
+**Problem:** Missed calls during treatments, lost bookings
+**Solution:** AI Agent 24/7 booking via WhatsApp + Reputation Management
+
+**Target Franchises:**
+- **Sorbet** - 200+ stores (largest in SA)
+- **Body20** - 70+ EMS fitness studios
+- **Dream Nails & Body** - Significant national footprint
+
+**Hook:** "Book 10 appointments you'd otherwise miss"
+
+---
+
+#### 2. Automotive Service & Repair (Lifecycle Specialist)
+**Problem:** Missed calls when on floor, service reminder failures
+**Solution:** Missed Call Text-Back + automated 6-month service reminders
+
+**Target Franchises:**
+- **Hi-Q** - 130+ stores
+- **Bosch Car Service** - 150+ workshops
+- **Midas** - 260+ franchise stores
+
+**Hook:** "Never miss a lead again"
+
+---
+
+#### 3. Home Services & Equipment Hire (Speed-to-Lead)
+**Problem:** First responder wins, franchisees in field can't respond
+**Solution:** AI lead qualification, instant SMS engagement
+
+**Target Franchises:**
+- **Coastal Hire** - 130+ equipment hire stores
+- **Wilcaste** - Waterproofing/roofing, large branch network
+- **Mostert Pest Control** - High-margin, widespread branches
+
+**Hook:** "Your most reliable employee for a fraction of the cost"
+
+---
+
+### Target Landscape Summary
+
+| Niche | Lead Franchise | Count | Primary GHL Hook |
+|-------|---------------|-------|-----------------|
+| Beauty | Sorbet | 200+ | WhatsApp AI Booking |
+| Automotive | Hi-Q / Bosch | 280+ | Missed Call / Reminders |
+| Home Services | Coastal Hire | 130+ | Instant AI Lead Qualification |
+
+### Go-To-Market Strategy
+
+1. **Start Small:** Land 3-5 individual franchisees in one region (Gauteng or WC)
+2. **Prove ROI:** Get testimonials from early adopters
+3. **Scale Up:** Approach regional franchise forum or Head Office for "preferred vendor" endorsement
+4. **Replicate:** Roll out to entire franchise network
+
+---
+
+### Referral Incentive: "Bring 4, Go Free"
+
+**Commission:** 25% recurring per referral
+
+**Tier System:**
+- **Client Tier:** ZAR 2k/month
+- **Referrer:** Earns 25% of referred client's monthly fee
+- **4 Referrals at same/higher tier = FREE** (4 x 25% = 100%)
+
+**How it works:**
+- Client refers 4 new franchisees (same or higher tier)
+- Each referral = 25% discount
+- 4 referrals = 100% discount = FREE
+
+**Example:**
+- You pay ZAR 2k/month
+- Refer 4 clients @ ZAR 2k each = ZAR 8k MRR
+- Your commission: 25% of ZAR 8k = ZAR 2k/month credit
+- Net: FREE
+
+**Golden Handcuffs:**
+- Easy to stay when you're essentially earning your subscription
+- Viral growth loop
+- Clients become sales team
+
+---
+
 ## Notes
 - Focus: Bootstrap → Scale → Automate
 - Target: Local SA market first, then international
