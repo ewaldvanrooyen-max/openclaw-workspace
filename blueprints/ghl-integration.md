@@ -4,127 +4,113 @@
 **GHL Integration** - White-Label Business-in-a-Box
 
 ## Vision
-Build a fully autonomous, white-labeled "business in a box" using GoHighLevel (GHL). Uses Agent Studio for reasoning, Workflow AI for decisions, and SaaS Mode for automated scaling.
+Build a fully autonomous, white-labeled "business in a box" using GoHighLevel (GHL). Transition from service agency to SaaS using Agent Studio for reasoning, Workflow AI for decisions, and SaaS Mode for automated scaling.
 
 ---
 
-## Core Metrics
-| Metric | Target | Current |
-|--------|--------|---------|
-| Clients | 10 | 0 |
-| MRR | $5,000 | 0 |
-| Active Agents | 5 | 0 |
+## 3-Phase Scaling Model
+
+### Phase 1: Bootstrapped Foundation ($97/mo)
+**Agency Starter**
+
+- **Platform:** $97 plan (max 3 sub-accounts)
+- **Use:** 1 internal agency + 2 clients
+- **Focus:** Launch marketing engine, first 2 clients
+
+**Tasks:**
+- [ ] Set up GHL account (Starter $97/mo)
+- [ ] Build agency funnel & lead capture forms
+- [ ] Create 5-day lead nurture sequence
+- [ ] Install Paystack/Payfast (SA payments in ZAR)
+- [ ] Manual onboarding for 2 clients
+
+**Profit:** Low overhead retainer
 
 ---
 
-## Repository
-- **URL:** N/A (GHL is SaaS)
-- **Docs:** Internal
+### Phase 2: Agency Growth ($297/mo)
+**Agency Unlimited**
+
+- **Platform:** $297 plan (unlimited accounts)
+- **Use:** Scale to 10+ clients
+- **Focus:** White-label, Snapshots, API
+
+**Tasks:**
+- [ ] Upgrade to Unlimited ($297/mo)
+- [ ] Configure white-label (app.yourdomain.com)
+- [ ] Create branded dashboard (logo, colors)
+- [ ] Build industry Snapshots (deploy in 20-40 min)
+- [ ] Set up REST API access
+- [ ] Connect external tools/dashboards
+
+**Profit:** Scalable flat-fee access
 
 ---
 
-## 5 Phases
+### Phase 3: Total Autonomy ($497/mo)
+**Agency Pro - "Business in a Box"**
 
-### Phase 1: Infrastructure & White-Label
-**Status:** Not started
-- [ ] Secure Agency Pro Plan ($497/mo) - unlocks SaaS Mode
-- [ ] White-label configuration:
-  - [ ] Map custom domain (app.yourdomain.com)
-  - [ ] Upload branded logos/favicons
-- [ ] Financial architecture:
-  - [ ] Connect Stripe
-  - [ ] Set up subscription tiers ($297-$497/mo)
-  - [ ] Enable Usage Rebilling (markup SMS/email/AI)
+- **Platform:** $497/mo (SaaS Mode)
+- **Use:** 10+ clients, fully automated
+- **Focus:** AI Agents, auto-billing, compliance
 
-### Phase 2: Digital Brain
-**Status:** Not started
-- [ ] Agent Studio Setup:
-  - [ ] Create specialized agents (drag-and-drop)
-  - [ ] Use Sequential Nodes for data capture
-  - [ ] Use AI Agent Nodes for LLM reasoning
-- [ ] Knowledge Retrieval (RAG):
-  - [ ] Upload "Source of Truth" materials
-  - [ ] Connect to Knowledge Base Tool Node
-- [ ] CRM Integration via MCP:
-  - [ ] Connect to Model Context Protocol Server
-  - [ ] Grant specific scopes (permissions)
-  - [ ] Enable read/write to CRM, pipelines, tasks, calendar
+**The Engine of Autonomy:**
+- **AI Employee Deployment:** Use Agent Studio
+  - AI Router Node for intent classification
+  - Booking Agent (leads → demos)
+  - Support Agent (tickets → resolution)
+- **Knowledge Retrieval (RAG):** 
+  - Upload FAQs, brochures to Knowledge Base Node
+  - Gives agents "Business DNA"
 
-### Phase 3: Operations & Zero-Human
-**Status:** Not started
-- [ ] Autonomous Lead Triage:
-  - [ ] Deploy AI Router Node
-  - [ ] Route by intent (demo → Booking, complaint → Support)
-- [ ] Speed-to-Lead:
-  - [ ] Configure Workflow AI for sentiment analysis
-  - [ ] Trigger Voice AI for "Hot" leads
-- [ ] Complex Task Execution:
-  - [ ] Build agents for high-level judgment
-  - [ ] Add API Call Nodes (Stripe, etc.)
+**Financial Automation:**
+- [ ] Connect Stripe via SaaS Configurator
+- [ ] Enable Usage Rebilling (mark up AI/SMS/email 50%)
+- [ ] Auto-provision client accounts on payment
+- [ ] Apply Snapshots automatically
 
-### Phase 4: Internationalization
-**Status:** Not started
-- [ ] Multi-Language:
-  - [ ] Set Platform Language (12+ languages)
-  - [ ] Train Conversation AI for specific markets
-- [ ] Automated Compliance:
-  - [ ] GDPR/POPIA consent checkboxes
-  - [ ] Double opt-in workflows
-  - [ ] Universal unsubscribe links
+**Compliance:**
+- [ ] Build POPIA/GDPR workflows
+- [ ] Automated consent checkboxes
+- [ ] Double opt-in verification
+- [ ] Unsubscribe logic
 
-### Phase 5: Productization (The "Box")
-**Status:** Not started
-- [ ] Master Snapshot:
-  - [ ] Create comprehensive snapshot
-  - [ ] Package funnels, pipelines, agents
-  - [ ] Include knowledge base connections
-- [ ] Automated Provisioning:
-  - [ ] Attach snapshot to pricing plans
-  - [ ] Auto-create sub-accounts on signup
-  - [ ] Trigger Autonomous Onboarding Agent
-- [ ] Ongoing Maintenance:
-  - [ ] Use "Push Snapshot" for updates
-  - [ ] Deploy to all clients simultaneously
+**Profit:** Markup on AI usage + MRR
 
 ---
 
-## Key Components
+## Tech Stack
 
-### Autonomous Replacements
-| Component | Autonomous Replacement | GHL Technical Implementation |
-|-----------|----------------------|------------------------------|
-| Sales Rep | Lead Qualification & Booking | Agent Studio + AI Router + Voice AI |
-| Support Desk | FAQ & Troubleshooting | Knowledge Base Node + RAG |
-| Billing Admin | Invoicing & Refunds | Stripe Integration + API Call Nodes |
-| Operations | Data Entry & CRM Sync | MCP Server Node (Read/Write) |
-| Compliance Officer | Legal Opt-ins & Audits | Workflow AI + Consent Automations |
-
-### Agents to Build
-- Booking Agent
-- Support Agent
-- Lead Triage Agent
-- Voice AI Agent
-- Compliance Agent
-- Onboarding Agent
-
-### Integrations
-| Service | Purpose | Status |
-|---------|---------|--------|
-| Stripe | Payments & billing | Pending |
-| GHL | CRM/Automation | Pending |
-| MCP | Agent-to-CRM | Pending |
-| Knowledge Base | RAG | Pending |
+| Component | Implementation |
+|-----------|---------------|
+| Platform | GoHighLevel |
+| AI | Agent Studio + Workflow AI |
+| Payments | Stripe + Paystack/Payfast |
+| Domain | White-label (app.yourdomain.com) |
+| API | REST endpoints |
+| Compliance | Automated POPIA/GDPR |
 
 ---
 
 ## Costs
-- Agency Pro: $497/mo
-- Estimated markup: 20-30% on usage
-- Break-even: 3 clients
+
+| Tier | Price | Clients |
+|------|-------|---------|
+| Starter | $97/mo | 1-2 |
+| Unlimited | $297/mo | 3-10 |
+| Pro | $497/mo | 10+ |
+
+**Break-even:** ~3 clients at $297
+
+---
+
+## Current Status
+- Blueprint expanded
+- Ready for implementation
 
 ---
 
 ## Notes
-- Focus: Build once, sell many times
-- Target: International clients
-- Goal: Zero-human intervention after setup
+- Focus: Bootstrap → Scale → Automate
+- Target: Local SA market first, then international
+- Goal: Replace human knowledge workers with AI
