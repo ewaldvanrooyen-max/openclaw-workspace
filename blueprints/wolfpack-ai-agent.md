@@ -15,6 +15,16 @@ Build a subscription-based "unlimited" AI agent wrapper around OpenClaw. Sell to
 - Powered by MiniMax (cheap)
 - Local-first option (PocketPal)
 
+### Local Models (via Ollama) - Updated 2026-03-16
+| Model | Size | RAM | Notes |
+|-------|------|-----|-------|
+| **Qwen 3 VL** | 2-4B | 4-8GB | Top pick - 128k context |
+| **Gemma 3** | 4B | 8GB | Google's best |
+| **Llama 3.2 Vision** | 11B | 16GB | Best quality |
+| **DeepSeek-OCR** | 3B | 6GB | Document parsing |
+
+**Key:** Must have 128k context for OpenClaw. Old models (LLaVA 7B) = too small = crashes.
+
 **Key Feature:** "Unlimited" AI agent
 - User pays $30/mo
 - We pay ~$15/mo to MiniMax

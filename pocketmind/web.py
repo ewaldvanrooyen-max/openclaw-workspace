@@ -8,16 +8,22 @@ Simple Flask web interface for testing PocketPal from mobile.
 import os
 import sys
 import json
+import requests
 from pathlib import Path
 
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-from agent.brain import MockBrain
 from storage.json_store import ProfileStore, HistoryStore
 
 app = Flask(__name__, template_folder='templates')
+
+# MiniMax Configuration
+MINIMAX_API_KEY = os.environ.get("MINIMAX_API_KEY", "")
+MINIMAX_BASE_URL = os.environ.get("MINIMAX_BASE_URL", "https://api.minimax.io/v1")
+MINIMAX_MODEL = os.environ.get("MINIMAX_MODEL", "MiniMax-M2.5")
+USE_MINIMAX = bool(MINIMAX_API_KEY)
 
 # Create templates folder
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
@@ -28,8 +34,96 @@ DATA_DIR = os.path.expanduser("~/.pocketmind")
 profile_store = ProfileStore(DATA_DIR)
 history_store = HistoryStore(DATA_DIR)
 
-# Initialize brain (mock for now)
-brain = MockBrain()
+
+class MiniMaxBrain:
+    """MiniMax API brain for cloud inference."""
+    
+    def __init__(self):
+        self._loaded = True
+        self._offline_mode = False
+        self._model_name = MINIMAX_MODEL
+        self._api_key = MINIMAX_API_KEY
+        self._base_url = MINIMAX_BASE_URL
+        
+    def chat(self, messages, **kwargs) -> str:
+        """Generate response using MiniMax API."""
+        if not self._api_key:
+            return "⚠ MiniMax API key not configured. Please set MINIMAX_API_KEY environment variable."
+        
+        try:
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self._api_key}"
+            }
+            
+            # Convert messages to MiniMax format
+            mm_messages = []
+            for msg in messages:
+                role = msg.get("role", "user")
+                if role == "assistant":
+                    role = "assistant"
+                elif role == "system":
+                    role = "system"
+                else:
+                    role = "user"
+                mm_messages.append({"role": role, "content": msg.get("content", "")})
+            
+            payload = {
+                "model": self._model_name,
+                "messages": mm_messages,
+                "temperature": kwargs.get("temperature", 0.7),
+                "max_tokens": kwargs.get("max_tokens", 1024)
+            }
+            
+            response = requests.post(
+                f"{self._base_url}/text/chatcompletion_v2",
+                headers=headers,
+                json=payload,
+                timeout=60
+            )
+            
+            if response.status_code != 200:
+                return f"⚠ API Error: {response.status_code} - {response.text}"
+            
+            data = response.json()
+            return data.get("choices", [{}])[0].get("message", {}).get("content", "No response")
+            
+        except Exception as e:
+            return f"⚠ Error: {str(e)}"
+    
+    @property
+    def is_loaded(self) -> bool:
+        return self._loaded
+    
+    @property
+    def is_offline(self) -> bool:
+        return self._offline_mode
+    
+    @property
+    def model_name(self) -> str:
+        return self._model_name
+
+
+# Initialize brain based on configuration
+if USE_MINIMAX:
+    from agent.brain import MockBrain
+    brain = MiniMaxBrain()
+    print(f"🧠 Using MiniMax API: {MINIMAX_MODEL}")
+else:
+    from agent.brain import MockBrain
+    brain = MockBrain()
+    print("🧠 Using MockBrain (set MINIMAX_API_KEY to enable MiniMax)")
+
+# Health endpoint
+@app.route('/api/health')
+def api_health():
+    return jsonify({
+        "status": "ok",
+        "model": brain.model_name,
+        "provider": "minimax" if USE_MINIMAX else "mock",
+        "offline": brain.is_offline,
+        "timestamp": str(Path("/").stat().st_ctime) if False else ""
+    })
 
 
 # Create base template

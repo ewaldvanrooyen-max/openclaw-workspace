@@ -24,6 +24,20 @@ model:
   gpu_layers: 0
 
 # ============================================
+# MINIMAX API CONFIGURATION (Cloud AI)
+# ============================================
+# To use MiniMax API instead of local models:
+# 1. Get your API key from https://platform.minimaxi.com/
+# 2. Set the environment variable:
+#    export MINIMAX_API_KEY=your_api_key_here
+# 3. Optionally set:
+#    export MINIMAX_BASE_URL=https://api.minimax.io/v1
+#    export MINIMAX_MODEL=MiniMax-M2.5
+#
+# MiniMax provides much faster responses than local models
+# and doesn't require downloading large model files.
+
+# ============================================
 # GENERATION DEFAULTS
 # ============================================
 generation:
