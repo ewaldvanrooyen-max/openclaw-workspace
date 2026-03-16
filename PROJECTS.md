@@ -84,6 +84,10 @@
 ### 5. Autonomous Income
 **Description:** Revenue streams powered by our automation
 
+### 6. WolfPack AI Agent
+**Description:** Subscription-based "unlimited" AI agent (Genspark alternative)
+**Status:** Concept
+
 **Sub-divisions:**
 - `affiliate` - ContentEngen + affiliate links
 - `digital-products` - SEO guides, templates
