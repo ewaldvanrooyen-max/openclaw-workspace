@@ -47,7 +47,7 @@ execute_task() {
     echo "Running: $task_script" >> "$LOG_FILE"
     echo "" >> "$LOG_FILE"
     
-    # Execute the task script if it exists
+    # Execute the task script if it exists, or run inline command
     if [ -f "$WORKSPACE/$task_script" ]; then
         cd "$WORKSPACE"
         if bash "$WORKSPACE/$task_script" >> "$LOG_FILE" 2>&1; then
@@ -55,6 +55,10 @@ execute_task() {
         else
             echo "❌ **$task_id:** $task_name - FAILED" >> "$LOG_FILE"
         fi
+    elif [[ "$task_script" == echo* ]]; then
+        # Handle inline echo commands
+        eval "$task_script" >> "$LOG_FILE" 2>&1
+        echo "✅ **$task_id:** $task_name - COMPLETE" >> "$LOG_FILE"
     else
         echo "⚠️  **$task_id:** Script not found ($task_script)" >> "$LOG_FILE"
     fi
