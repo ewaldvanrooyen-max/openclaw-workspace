@@ -132,6 +132,12 @@ BASE_TEMPLATE = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#161b22">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="static/manifest.json">
+    <link rel="icon" type="image/png" href="static/icon-192.png">
+    <link rel="apple-touch-icon" href="static/icon-192.png">
     <title>{% block title %}PocketPal{% endblock %}</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -310,6 +316,15 @@ BASE_TEMPLATE = """<!DOCTYPE html>
         </a>
     </nav>
     {% block scripts %}{% endblock %}
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('static/sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW registration failed'));
+            });
+        }
+    </script>
 </body>
 </html>
 """

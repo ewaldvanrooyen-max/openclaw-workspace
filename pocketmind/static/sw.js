@@ -1,6 +1,6 @@
 // PocketPal Service Worker
 const CACHE_NAME = 'pocketpal-v1';
-const OFFLINE_URL = '/';
+const OFFLINE_URL = '/pocketpal/';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -16,6 +16,9 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') return;
+  
   // Skip cross-origin requests
   if (!event.request.url.startsWith(self.location.origin)) {
     return;
@@ -26,7 +29,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(event.request).catch(() => {
         return caches.match(event.request).then((response) => {
-          return response || caches.match('/');
+          return response || caches.match('/pocketpal/');
         });
       })
     );
