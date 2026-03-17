@@ -677,3 +677,7 @@ if __name__ == '__main__':
     print("Open http://76.13.195.238:5005 on your phone!")
     print("=" * 50)
     app.run(host='0.0.0.0', port=5005, debug=True)
+
+@app.route('/download')
+def download():
+    return render_template('download.html', page='download')

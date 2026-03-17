@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}PocketPal - Download Models{% endblock %}
+{% block content %}
+    <div class="card">
+        <h2>📥 Download AI Models</h2>
+        <p style="color:#8b949e;margin-top:8px;">
+            Choose a model for offline AI. Smaller = faster, Larger = smarter.
+        </p>
+    </div>
+    
+    <div class="card">
+        <h3>Available Models</h3>
+        
+        <div class="model-option">
+            <h4>SmolLM2 360M</h4>
+            <p style="color:#666;font-size:12px;">180MB • Fastest • Best for low RAM</p>
+            <p style="color:#00ff88;">✓ Downloaded</p>
+        </div>
+        
+        <div class="model-option">
+            <h4>Qwen2.5 0.5B</h4>
+            <p style="color:#666;font-size:12px;">360MB • Good balance</p>
+            <button class="btn" onclick="downloadModel('qwen2.5')">Download</button>
+        </div>
+        
+        <div class="model-option">
+            <h4>LLaMA 3.2 1B</h4>
+            <p style="color:#666;font-size:12px;">680MB • Better quality</p>
+            <button class="btn" onclick="downloadModel('llama3.2')">Download</button>
+        </div>
+        
+        <div class="model-option">
+            <h4>Qwen2.5 3B</h4>
+            <p style="color:#666;font-size:12px;">1.8GB • Best quality (needs more RAM)</p>
+            <button class="btn" onclick="downloadModel('qwen2.5-3b')">Download</button>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>Current Status</h3>
+        <p id="status">Checking...</p>
+    </div>
+    
+    <script>
+        async function checkStatus() {
+            const res = await fetch('/api/model/status');
+            const data = await res.json();
+            document.getElementById('status').textContent = JSON.stringify(data, null, 2);
+        }
+        
+        async function downloadModel(model) {
+            if (!confirm('Download ' + model + '? This may take a while.')) return;
+            alert('Download started! This feature is coming soon.');
+        }
+        
+        checkStatus();
+    </script>
+    
+    <style>
+        .model-option {
+            padding:15px;
+            background:#161b22;
+            border-radius:8px;
+            margin:10px 0;
+        }
+    </style>
+{% endblock %}
