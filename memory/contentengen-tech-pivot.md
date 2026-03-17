@@ -76,10 +76,10 @@
 ## Rollout Plan
 
 ### Week 1: Foundation (Mar 12-18)
-- [ ] Upgrade Next.js → 16.1
-- [ ] Migrate now.json → vercel.json ⚠️ DEADLINE: MAR 31
-- [ ] Run Biome migration
-- [ ] **SKIP** Gemini upgrade (sticking with 2.5 for COGS)
+- [x] Upgrade Next.js → 16.1 ✅ DONE (v16.1.6 installed)
+- [x] Migrate now.json → vercel.json ✅ DONE (vercel.json already present, no now.json)
+- [x] Run Biome migration ✅ DONE (biome.json present)
+- [ ] **SKIP** Gemini upgrade (sticking with 2.5 for COGS) - N/A
 
 ### Week 2: Agentic Refactor (Mar 19-25)
 - [ ] Scope down LangGraph (simplify, not full overhaul)

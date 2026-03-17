@@ -4,6 +4,10 @@
     "playwright": {
       "version": "1.0.2",
       "installedAt": 1772862911819
+    },
+    "exa-web-search-free": {
+      "version": "1.0.1",
+      "installedAt": 1773723961866
     }
   }
 }
